@@ -5,6 +5,7 @@ class KeyboardSoundEngine {
   constructor() {
     this.ctx = null;
     this.muted = false;
+    this.bufferCache = {};
     this.initAudioContext();
   }
 
@@ -45,6 +46,42 @@ class KeyboardSoundEngine {
     const jitter = (Math.random() - 0.5) * 35;
     const isSpacebar = keyName === 'SPACE' || keyName === ' ' || keyName === 'Space';
 
+    // Load real sound file if available, otherwise fallback to synthetic
+    const basePath = 'sound';
+    const key = (keyName || 'default').toLowerCase();
+    const url = `${basePath}/${switchType}/${key}.wav`;
+
+    const playFromBuffer = (buffer) => {
+      const src = this.ctx.createBufferSource();
+      src.buffer = buffer;
+      src.connect(this.ctx.destination);
+      src.start();
+    };
+
+    // Use cached buffer if present
+    if (this.bufferCache[url]) {
+      playFromBuffer(this.bufferCache[url]);
+      return;
+    }
+
+    fetch(url)
+      .then(r => {
+        if (!r.ok) throw new Error('not found');
+        return r.arrayBuffer();
+      })
+      .then(ab => this.ctx.decodeAudioData(ab))
+      .then(buf => {
+        this.bufferCache[url] = buf;
+        playFromBuffer(buf);
+      })
+      .catch(() => {
+        // Fallback to synthetic sound
+        this._playSynthetic(now, jitter, isSpacebar, switchType);
+      });
+  }
+
+  // Internal helper: synthetic fallback (unchanged logic)
+  _playSynthetic(now, jitter, isSpacebar, switchType) {
     switch (switchType) {
       case 'magnetic_jade': // Deep magnetic poppy thock (Gateron Magnetic Jade)
         this.synthMagneticJade(now, 160 + jitter, isSpacebar ? 0.38 : 0.24, isSpacebar ? 1.3 : 1.0);
