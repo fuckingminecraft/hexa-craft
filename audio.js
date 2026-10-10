@@ -6,14 +6,29 @@ class KeyboardSoundEngine {
     this.ctx = null;
     this.muted = false;
     this.bufferCache = {};
-    this.initAudioContext();
+    this._contextReady = false;
+
+    // Defer AudioContext creation until first user gesture (browser autoplay policy)
+    const initOnGesture = () => {
+      if (!this._contextReady) {
+        this._initAudioContext();
+      }
+    };
+    document.addEventListener('click', initOnGesture);
+    document.addEventListener('keydown', initOnGesture);
+    document.addEventListener('touchstart', initOnGesture);
   }
 
-  initAudioContext() {
+  _initAudioContext() {
+    if (this._contextReady && this.ctx) return;
     try {
       const AudioCtx = window.AudioContext || window.webkitAudioContext;
       if (AudioCtx) {
         this.ctx = new AudioCtx();
+        if (this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+        this._contextReady = true;
       }
     } catch (e) {
       console.warn('Web Audio not supported in this browser.', e);
@@ -22,7 +37,7 @@ class KeyboardSoundEngine {
 
   ensureContext() {
     if (!this.ctx) {
-      this.initAudioContext();
+      this._initAudioContext();
     }
     if (this.ctx && this.ctx.state === 'suspended') {
       this.ctx.resume();
@@ -46,38 +61,8 @@ class KeyboardSoundEngine {
     const jitter = (Math.random() - 0.5) * 35;
     const isSpacebar = keyName === 'SPACE' || keyName === ' ' || keyName === 'Space';
 
-    // Load real sound file if available, otherwise fallback to synthetic
-    const basePath = 'sound';
-    const key = (keyName || 'default').toLowerCase();
-    const url = `${basePath}/${switchType}/${key}.wav`;
-
-    const playFromBuffer = (buffer) => {
-      const src = this.ctx.createBufferSource();
-      src.buffer = buffer;
-      src.connect(this.ctx.destination);
-      src.start();
-    };
-
-    // Use cached buffer if present
-    if (this.bufferCache[url]) {
-      playFromBuffer(this.bufferCache[url]);
-      return;
-    }
-
-    fetch(url)
-      .then(r => {
-        if (!r.ok) throw new Error('not found');
-        return r.arrayBuffer();
-      })
-      .then(ab => this.ctx.decodeAudioData(ab))
-      .then(buf => {
-        this.bufferCache[url] = buf;
-        playFromBuffer(buf);
-      })
-      .catch(() => {
-        // Fallback to synthetic sound
-        this._playSynthetic(now, jitter, isSpacebar, switchType);
-      });
+    // Go directly to synthetic sound — individual per-key wav files are not shipped
+    this._playSynthetic(now, jitter, isSpacebar, switchType);
   }
 
   // Internal helper: synthetic fallback (unchanged logic)
