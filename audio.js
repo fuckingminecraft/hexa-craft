@@ -1,14 +1,12 @@
-// Audio Player Engine with robust fallback and error logging
+// Audio Player Engine: 기계식 스위치는 무음 처리, 자석축만 실제 오디오 파일 재생
 class KeyboardSoundEngine {
   constructor() {
     this.muted = false;
+    
+    // 실제 오디오 파일이 존재하는 자석축 오디오 파일 경로 매핑
     this.audioFiles = {
       'magnetic_jade': 'audio/magnetic_jade.wav',
-      'magnetic_raw': 'audio/magnetic_raw.wav',
-      'linear': 'audio/linear.wav',
-      'tactile': 'audio/tactile.wav',
-      'silent': 'audio/silent.wav',
-      'clicky': 'audio/clicky.wav'
+      'magnetic_raw': 'audio/magnetic_raw.wav'
     };
     
     this.sounds = {};
@@ -21,7 +19,7 @@ class KeyboardSoundEngine {
       audio.src = path;
       audio.preload = 'auto';
       audio.onerror = () => {
-        console.warn(`[Audio Warning] 파일을 찾을 수 없거나 로드 실패: ${path}`);
+        console.warn(`[Audio Warning] 파일을 찾을 수 없습니다: ${path}`);
       };
       this.sounds[key] = audio;
     }
@@ -35,7 +33,12 @@ class KeyboardSoundEngine {
   playKey(switchType = 'linear', keyName = '') {
     if (this.muted) return;
 
-    let targetSound = this.sounds[switchType] || this.sounds['linear'];
+    // 기계식 스위치 종류(linear, tactile, silent, clicky 등)는 소리가 나지 않도록 무음 처리
+    if (!this.audioFiles[switchType]) {
+      return; 
+    }
+
+    let targetSound = this.sounds[switchType];
     
     if (targetSound && targetSound.src) {
       const clone = targetSound.cloneNode();
@@ -44,13 +47,13 @@ class KeyboardSoundEngine {
       clone.volume = isSpacebar ? 1.0 : 0.8;
 
       clone.play().catch(e => {
-        // 브라우저 정책으로 차단되었거나 파일 오류 발생 시
-        console.warn('오디오 재생이 차단되었거나 실패했습니다:', e);
+        console.warn('오디오 재생 차단 또는 오류:', e);
       });
     }
   }
 
   playProfile(profile) {
+    // 프로필 데모도 자석축 기반(magnetic_jade)으로 동작하도록 설정
     const phrases = [
       { key: 'H', delay: 0 },
       { key: 'E', delay: 110 },
@@ -59,14 +62,9 @@ class KeyboardSoundEngine {
       { key: 'SPACE', delay: 400 }
     ];
 
-    let switchType = 'linear';
-    if (profile === 'thock') switchType = 'magnetic_jade';
-    if (profile === 'clack') switchType = 'tactile';
-    if (profile === 'creamy') switchType = 'linear';
-
     phrases.forEach(item => {
       setTimeout(() => {
-        this.playKey(switchType, item.key);
+        this.playKey('magnetic_jade', item.key);
       }, item.delay);
     });
   }
