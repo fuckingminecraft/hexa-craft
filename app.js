@@ -251,24 +251,26 @@ class HexaCraftApp {
       const card = document.createElement('div');
       card.className = 'product-item-card';
 
-      card.innerHTML = `
-        <div class="product-thumb-visual">
-          <span class="badge-flag">READY TO SHIP</span>
-        </div>
-        <div class="product-info-box">
-          <h4>${product.name}</h4>
-          <ul class="product-specs-list">
-            ${product.specs.map(s => `<li><i data-lucide="check" style="width:14px; height:14px; color:#39db80;"></i> ${s}</li>`).join('')}
-          </ul>
-          <div class="product-bottom-row">
-            <div class="item-price">₩${product.price.toLocaleString()}</div>
-            <button class="add-btn" data-id="${product.id}">
-              <i data-lucide="shopping-bag" style="width:14px; height:14px;"></i>
-              <span>장바구니 담기</span>
-            </button>
-          </div>
-        </div>
-      `;
+      let specsHtml = '';
+      product.specs.forEach(s => {
+        specsHtml += '<li><i data-lucide="check" style="width:14px; height:14px; color:#39db80;"></i> ' + s + '</li>';
+      });
+
+      card.innerHTML = 
+        '<div class="product-thumb-visual">' +
+          '<span class="badge-flag">READY TO SHIP</span>' +
+        '</div>' +
+        '<div class="product-info-box">' +
+          '<h4>' + product.name + '</h4>' +
+          '<ul class="product-specs-list">' + specsHtml + '</ul>' +
+          '<div class="product-bottom-row">' +
+            '<div class="item-price">₩' + product.price.toLocaleString() + '</div>' +
+            '<button class="add-btn" data-id="' + product.id + '">' +
+              '<i data-lucide="shopping-bag" style="width:14px; height:14px;"></i>' +
+              '<span>장바구니 담기</span>' +
+            '</button>' +
+          '</div>' +
+        '</div>';
 
       card.querySelector('.add-btn').addEventListener('click', () => {
         this.addToCart({
@@ -319,12 +321,11 @@ class HexaCraftApp {
     if (!list || !totalDisplay) return;
 
     if (this.cart.length === 0) {
-      list.innerHTML = `
-        <div class="empty-cart-msg">
-          <i data-lucide="shopping-bag" style="width:40px; height:40px; margin-bottom: 12px; stroke-width: 1.5;"></i>
-          <p>장바구니에 담긴 제품이 없습니다.</p>
-        </div>
-      `;
+      list.innerHTML = 
+        '<div class="empty-cart-msg">' +
+          '<i data-lucide="shopping-bag" style="width:40px; height:40px; margin-bottom: 12px; stroke-width: 1.5;"></i>' +
+          '<p>장바구니에 담긴 제품이 없습니다.</p>' +
+        '</div>';
       totalDisplay.textContent = '0';
       if (window.lucide) window.lucide.createIcons();
       return;
@@ -337,17 +338,17 @@ class HexaCraftApp {
       totalSum += item.price * item.qty;
       const row = document.createElement('div');
       row.className = 'cart-item-row';
-      row.innerHTML = `
-        <div class="cart-item-title-row">
-          <span class="cart-item-title">${item.name}</span>
-          <span class="cart-item-delete" data-index="${index}"><i data-lucide="trash-2" style="width:16px; height:16px;"></i></span>
-        </div>
-        <div class="cart-item-details">${item.details}</div>
-        <div class="cart-item-bottom">
-          <span class="cart-item-qty">수량: ${item.qty}개</span>
-          <span class="cart-item-price">₩${(item.price * item.qty).toLocaleString()}</span>
-        </div>
-      `;
+      row.innerHTML = 
+        '<div class="cart-item-title-row">' +
+          '<span class="cart-item-title">' + item.name + '</span>' +
+          '<span class="cart-item-delete" data-index="' + index + '"><i data-lucide="trash-2" style="width:16px; height:16px;"></i></span>' +
+        '</div>' +
+        '<div class="cart-item-details">' + item.details + '</div>' +
+        '<div class="cart-item-bottom">' +
+          '<span class="cart-item-qty">수량: ' + item.qty + '개</span>' +
+          '<span class="cart-item-price">₩' + (item.price * item.qty).toLocaleString() + '</span>' +
+        '</div>';
+
       row.querySelector('.cart-item-delete').addEventListener('click', () => {
         this.removeFromCart(index);
       });
@@ -446,9 +447,9 @@ class HexaCraftApp {
 
     document.getElementById('addCustomToCartBtn').addEventListener('click', () => {
       const customItem = {
-        id: `VENOM-${Date.now()}`,
-        name: `VENOM 60HE 커스텀 빌드 (${this.state.pcbName})`,
-        details: `보강판: ${this.state.plateName} • 하우징: ${this.state.caseName} • 스위치: ${this.state.switchName} • 키캡: ${this.state.keycapName}`,
+        id: 'VENOM-' + Date.now(),
+        name: 'VENOM 60HE 커스텀 빌드 (' + this.state.pcbName + ')',
+        details: '보강판: ' + this.state.plateName + ' • 하우징: ' + this.state.caseName + ' • 스위치: ' + this.state.switchName + ' • 키캡: ' + this.state.keycapName,
         price: this.calculateTotal(),
         qty: 1
       };
@@ -456,7 +457,7 @@ class HexaCraftApp {
     });
 
     document.getElementById('saveShareConfigBtn').addEventListener('click', () => {
-      const summaryText = `[VENOM 60HE 커스텀 빌드 견적서]\n기판: ${this.state.pcbName}\n보강판: ${this.state.plateName}\n하우징: ${this.state.caseName}\n스위치: ${this.state.switchName}\n키캡: ${this.state.keycapName}\n총 견적 합계: ₩${this.calculateTotal().toLocaleString()}`;
+      const summaryText = '[VENOM 60HE 커스텀 빌드 견적서]\n기판: ' + this.state.pcbName + '\n보강판: ' + this.state.plateName + '\n하우징: ' + this.state.caseName + '\n스위치: ' + this.state.switchName + '\n키캡: ' + this.state.keycapName + '\n총 견적 합계: ₩' + this.calculateTotal().toLocaleString();
       navigator.clipboard.writeText(summaryText).then(() => {
         alert('클립보드에 베놈 60HE 커스텀 빌드 사양이 복사되었습니다!');
       }).catch(() => {
@@ -478,11 +479,10 @@ class HexaCraftApp {
         const receipt = document.getElementById('orderReceiptDetails');
         const totalSum = this.cart.reduce((acc, cur) => acc + (cur.price * cur.qty), 0);
         
-        receipt.innerHTML = `
-          <div><strong>주문 번호:</strong> #HEXA-${Math.floor(100000 + Math.random() * 900000)}</div>
-          <div><strong>주문 내역:</strong> ${this.cart.map(c => `${c.name} (${c.qty}개)`).join(', ')}</div>
-          <div><strong>최종 결제 금액:</strong> ₩${totalSum.toLocaleString()} (무료배송)</div>
-        `;
+        receipt.innerHTML = 
+          '<div><strong>주문 번호:</strong> #HEXA-' + Math.floor(100000 + Math.random() * 900000) + '</div>' +
+          '<div><strong>주문 내역:</strong> ' + this.cart.map(c => c.name + ' (' + c.qty + '개)').join(', ') + '</div>' +
+          '<div><strong>최종 결제 금액:</strong> ₩' + totalSum.toLocaleString() + ' (무료배송)</div>';
 
         this.closeCart();
         orderModal.showModal();

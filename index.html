@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HEXA CRAFT | 프리미엄 커스텀 키보드 스튜디오</title>
-  <link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
-  <link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
-  <link href="[https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap](https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap)" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <!-- Lucide Icons -->
-  <script src="[https://unpkg.com/lucide@latest](https://unpkg.com/lucide@latest)"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
   <!-- Header / Navigation -->
@@ -63,7 +63,6 @@
         그리고 카본파이버 보강판. 스크롤 전에 아래 버튼으로 바로 견적을 구성하거나 완성품을 둘러보세요.
       </p>
       
-      <!-- Primary Main Action Buttons -->
       <div class="hero-cta-group">
         <a href="#customizer" class="btn btn-primary btn-hero-main">
           <i data-lucide="sliders"></i>
@@ -80,7 +79,6 @@
         </a>
       </div>
 
-      <!-- Quick Jump Nav Cards -->
       <div class="hero-nav-cards">
         <a href="#customizer" class="hero-card-link">
           <div class="card-icon"><i data-lucide="cpu"></i></div>
@@ -146,12 +144,10 @@
             </div>
           </div>
 
-          <!-- Keyboard Rendering Arena -->
           <div class="keyboard-stage">
             <div class="keyboard-case-wrapper" id="keyboardHousing">
               <div class="case-bevel-outer">
                 <div class="case-bevel-inner">
-                  <!-- Plate & PCB & Switches Container -->
                   <div class="keyboard-plate" id="keyboardPlate">
                     <div class="keys-grid" id="keysGrid"></div>
                   </div>
@@ -160,7 +156,6 @@
             </div>
           </div>
 
-          <!-- Quick Test Typing Field & Sound Bar -->
           <div class="typing-tester-bar">
             <div class="tester-input-wrapper">
               <i data-lucide="terminal"></i>
@@ -172,7 +167,6 @@
             </button>
           </div>
 
-          <!-- Live Build Summary Bar -->
           <div class="build-specs-pill">
             <div class="pill-spec"><i data-lucide="cpu"></i> 기판: <strong id="summaryPcb">베놈 60HE v2 기판</strong></div>
             <div class="pill-spec"><i data-lucide="layers"></i> 보강판: <strong id="summaryPlate">카본 파이버 (Carbon Fiber)</strong></div>
@@ -293,7 +287,7 @@
               </div>
             </div>
 
-            <!-- Step 5: HE Magnetic Switches Only -->
+            <!-- Step 5: HE Magnetic Switches -->
             <div class="config-step-group">
               <label class="step-label">
                 <span class="step-num">05</span> 자석축 스위치 선택 (Magnetic Switches)
@@ -319,7 +313,6 @@
             </div>
           </div>
 
-          <!-- Checkout Box inside Customizer -->
           <div class="panel-checkout-card">
             <div class="price-row">
               <span class="price-label">커스텀 빌드 견적 합계</span>
@@ -353,7 +346,7 @@
       <div class="section-header text-center">
         <span class="section-badge">ACOUSTIC FREQUENCY LAB</span>
         <h2 class="section-title">스튜디오 사운드 랩</h2>
-        <p class="section-subtitle">로우피치(Thock)부터 클래키(Clack)까지. 전문 오디오 신디사이저로 구현된 실제 타건 프로필을 청음해보세요.</p>
+        <p class="section-subtitle">로우피치(Thock)부터 클래키(Clack)까지. 실제 자석축 사운드 샘플을 청음해보세요.</p>
       </div>
 
       <div class="sound-lab-grid">
@@ -367,7 +360,7 @@
               <span class="sound-tag">PC 보강판 + 포론 3중 폼 + 마그네틱 제이드</span>
             </div>
           </div>
-          <p class="sound-desc">비 오는 날 조약돌이 맞부딪히는 듯한 깊고 묵직한 중저음 음향입니다. 데스크에서 가장 선호되는 하이엔드 사운드입니다.</p>
+          <p class="sound-desc">비 오는 날 조약돌이 맞부딪히는 듯한 깊고 묵직한 중저음 음향입니다.</p>
           <div class="sound-eq-visualizer">
             <span class="bar b1"></span><span class="bar b2"></span><span class="bar b3"></span><span class="bar b4"></span><span class="bar b5"></span>
           </div>
@@ -386,7 +379,7 @@
               <span class="sound-tag">알루 보강판 + 노폼 클래식 + 마그네틱 RAW</span>
             </div>
           </div>
-          <p class="sound-desc">알루미늄 바디 특유의 청량함과 또렷한 바닥 스트로크 음. 빠른 타이핑 리듬감을 느낄 수 있는 명쾌한 타건음입니다.</p>
+          <p class="sound-desc">알루미늄 바디 특유의 청량함과 또렷한 바닥 스트로크 음입니다.</p>
           <div class="sound-eq-visualizer">
             <span class="bar b3"></span><span class="bar b5"></span><span class="bar b2"></span><span class="bar b4"></span><span class="bar b1"></span>
           </div>
@@ -413,7 +406,7 @@
     </div>
   </section>
 
-  <!-- Engineering & Craftsmanship Specs -->
+  <!-- Engineering Specs -->
   <section id="specs" class="section specs-section">
     <div class="section-container">
       <div class="specs-grid">
@@ -421,8 +414,7 @@
           <span class="section-badge">PRECISION CRAFTSMANSHIP</span>
           <h2 class="section-title">0.02mm의 오차도 허용하지 않는<br>풀 메탈 모던 아키텍처</h2>
           <p class="section-desc">
-            HEXA CRAFT는 플라스틱 사출 바디를 사용하지 않습니다. 통 알루미늄 인곳을 4시간에 걸쳐 정밀 5축 CNC로 가공한 뒤,
-            2단계 마이크로 비드 블라스트와 딥 애노다이징 코팅으로 완성됩니다.
+            HEXA CRAFT는 플라스틱 사출 바디를 사용하지 않습니다. 통 알루미늄 인곳을 정밀 5축 CNC로 가공하여 완성됩니다.
           </p>
 
           <div class="spec-points">
@@ -430,14 +422,14 @@
               <div class="point-icon"><i data-lucide="layers"></i></div>
               <div>
                 <h4>5중 가스켓 & 댐퍼 시스템</h4>
-                <p>포론 상하부 가스켓, IXPE 스위치 하부 패드, PET 절연 시트, EPDM 하부 흠음재가 통울림을 완벽 차단합니다.</p>
+                <p>포론 상하부 가스켓 및 흡음재가 통울림을 완벽 차단합니다.</p>
               </div>
             </div>
             <div class="point-item">
               <div class="point-icon"><i data-lucide="sliders"></i></div>
               <div>
-                <h4>장인 수작업 스테빌라이저 퍼펙트 튜닝</h4>
-                <p>스페이스바, 엔터키의 철심 수평 교정 및 XHT-BDZ 특수 윤활제로 찰랑거림 없는 완벽한 먹먹함과 정숙함을 선사합니다.</p>
+                <h4>장인 수작업 스테빌라이저 튜닝</h4>
+                <p>수평 교정 및 윤활제로 정숙함을 선사합니다.</p>
               </div>
             </div>
           </div>
@@ -451,19 +443,19 @@
             </div>
             <div class="layer-item l-plate">
               <span class="layer-tag">Plate & Gasket</span>
-              <span class="layer-name">FR4 플렉스컷 보강판 + 실리콘 가스켓 양말</span>
+              <span class="layer-name">FR4 플렉스컷 보강판 + 실리콘 가스켓</span>
             </div>
             <div class="layer-item l-pcb">
               <span class="layer-tag">PCB Circuit</span>
-              <span class="layer-name">1.2mm 플렉스컷 핫스왑 기판 (South-facing RGB)</span>
+              <span class="layer-name">1.2mm 자석축 핫스왑 기판</span>
             </div>
             <div class="layer-item l-foam">
               <span class="layer-tag">Acoustic Absorber</span>
-              <span class="layer-name">맞춤형 초고밀도 포론 & EPDM 하부 폼</span>
+              <span class="layer-name">맞춤형 초고밀도 포론 하부 폼</span>
             </div>
             <div class="layer-item l-bottom">
               <span class="layer-tag">Bottom Case & Weight</span>
-              <span class="layer-name">통 알루미늄 하판 + PVD 황동 미러 무게추 (1.8kg)</span>
+              <span class="layer-name">통 알루미늄 하판 + PVD 황동 무게추</span>
             </div>
           </div>
         </div>
@@ -481,8 +473,7 @@
             <div class="logo-text">HEXA<span>CRAFT</span></div>
           </div>
           <p class="brand-mission">
-            최상급 아노다이징 CNC 메탈과 정밀 음향 엔지니어링의 결합.<br>
-            손끝에서 피어나는 가장 모던하고 정갈한 타건 미학을 선사합니다.
+            최상급 아노다이징 CNC 메탈과 정밀 음향 엔지니어링의 결합.
           </p>
         </div>
 
@@ -491,7 +482,7 @@
             <h5>ATELIER PRODUCTS</h5>
             <a href="#customizer">커스텀 빌더 3D</a>
             <a href="#products">시그니처 완제품</a>
-            <a href="#sound-lab">사운드 주파수 랩</a>
+            <a href="#sound-lab">사운드 랩</a>
           </div>
           <div class="links-col">
             <h5>SERVICES</h5>
@@ -501,14 +492,13 @@
           <div class="links-col">
             <h5>CONTACT STUDIO</h5>
             <p class="studio-info">스튜디오 쇼룸: 서울특별시 성수동 아틀리에길 24</p>
-            <p class="studio-info">운영시간: 평일 11:00 ~ 19:00 (예약제 타건)</p>
             <p class="studio-info">고객지원: atelier@hexacraft.kr</p>
           </div>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <div class="copy">© 2026 HEXA CRAFT STUDIO. All Rights Reserved. Modern Black & Gray Mechanical Atelier.</div>
+        <div class="copy">© 2026 HEXA CRAFT STUDIO. All Rights Reserved.</div>
         <div class="legal-links">
           <a href="#">이용약관</a>
           <a href="#">개인정보처리방침</a>
@@ -535,7 +525,7 @@
     <div class="drawer-footer" id="cartFooter">
       <div class="cart-summary-line">
         <span>배송비</span>
-        <span class="free-shipping">무료 배송 (VIP 안전 특송)</span>
+        <span class="free-shipping">무료 배송</span>
       </div>
       <div class="cart-total-line">
         <span>총 결제 예정 금액</span>
@@ -546,7 +536,7 @@
       </div>
       <button class="btn btn-primary btn-block checkout-submit-btn" id="checkoutBtn">
         <i data-lucide="credit-card"></i>
-        <span>주문서 작성 및 안전 결제하기</span>
+        <span>주문서 작성 및 결제하기</span>
       </button>
     </div>
   </aside>
@@ -557,12 +547,12 @@
       <div class="modal-icon-success">
         <i data-lucide="check-circle-2"></i>
       </div>
-      <h3>커스텀 주문이 성공적으로 접수되었습니다</h3>
+      <h3>주문이 접수되었습니다</h3>
       <p class="order-notice">
-        HEXA CRAFT 마스터 빌더가 주문 사양에 맞춰 부품 선별, 스위치 풀윤활, 스테빌라이저 수평 교정 및 타건 검수를 진행합니다.
+        HEXA CRAFT 마스터 빌더가 검수 및 출고를 준비합니다.
       </p>
       <div class="order-receipt-box" id="orderReceiptDetails"></div>
-      <button class="btn btn-primary btn-block" id="closeOrderModalBtn">확인 및 쇼핑 계속하기</button>
+      <button class="btn btn-primary btn-block" id="closeOrderModalBtn">확인</button>
     </div>
   </dialog>
 
