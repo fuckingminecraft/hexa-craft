@@ -1,8 +1,7 @@
-// Audio Player Engine using actual audio files (.wav) via HTML5 Audio
+// Audio Player Engine with robust fallback and error logging
 class KeyboardSoundEngine {
   constructor() {
     this.muted = false;
-    // 실제 audio 폴더 내 .wav 파일 경로 매핑
     this.audioFiles = {
       'magnetic_jade': 'audio/magnetic_jade.wav',
       'magnetic_raw': 'audio/magnetic_raw.wav',
@@ -12,15 +11,18 @@ class KeyboardSoundEngine {
       'clicky': 'audio/clicky.wav'
     };
     
-    // 미리 Audio 객체를 생성하여 캐싱 (로딩 지연 방지)
+    this.sounds = {};
     this.preloadElements();
   }
 
   preloadElements() {
-    this.sounds = {};
     for (const [key, path] of Object.entries(this.audioFiles)) {
-      const audio = new Audio(path);
+      const audio = new Audio();
+      audio.src = path;
       audio.preload = 'auto';
+      audio.onerror = () => {
+        console.warn(`[Audio Warning] 파일을 찾을 수 없거나 로드 실패: ${path}`);
+      };
       this.sounds[key] = audio;
     }
   }
@@ -30,23 +32,20 @@ class KeyboardSoundEngine {
     return this.muted;
   }
 
-  // 키를 누를 때 실제 오디오 파일(.wav) 재생
   playKey(switchType = 'linear', keyName = '') {
     if (this.muted) return;
 
     let targetSound = this.sounds[switchType] || this.sounds['linear'];
     
-    if (targetSound) {
-      // 다중 타건 시 겹쳐서 자연스럽게 소리가 나도록 복제(cloneNode)하여 재생
+    if (targetSound && targetSound.src) {
       const clone = targetSound.cloneNode();
-      
-      // 스페이스바 등은 재생 속도를 살짝 낮춰 무게감 표현
       const isSpacebar = keyName === 'SPACE' || keyName === ' ' || keyName === 'Space';
       clone.playbackRate = isSpacebar ? 0.85 : (0.95 + Math.random() * 0.1);
       clone.volume = isSpacebar ? 1.0 : 0.8;
 
       clone.play().catch(e => {
-        console.warn('오디오 재생 실패 (audio 폴더 내 .wav 파일명을 확인해주세요):', e);
+        // 브라우저 정책으로 차단되었거나 파일 오류 발생 시
+        console.warn('오디오 재생이 차단되었거나 실패했습니다:', e);
       });
     }
   }
