@@ -437,7 +437,6 @@ class HexaCraftApp {
     }
   }
 
-  // Calculate current build price
   calculateTotal() {
     return this.basePrice + 
       this.state.pcbPrice + 
@@ -454,7 +453,6 @@ class HexaCraftApp {
       display.textContent = total.toLocaleString();
     }
 
-    // Update Live Summary Specs
     const sumPcb = document.getElementById('summaryPcb');
     if (sumPcb) sumPcb.textContent = this.state.pcbName;
     const sumPlate = document.getElementById('summaryPlate');
@@ -465,28 +463,27 @@ class HexaCraftApp {
     if (sumSwitch) sumSwitch.textContent = this.state.switchName;
   }
 
-  // Keycap theme styles resolver
   getKeycapColors(role) {
     const theme = this.state.keycap;
 
     switch (theme) {
-      case 'stealth': // Charcoal alphas + Deep Black mods
+      case 'stealth':
         if (role === 'accent') return { bg: '#2b2f38', color: '#fff', shadow: '#101216' };
         if (role === 'mod') return { bg: '#131418', color: '#888f9e', shadow: '#090a0d' };
         return { bg: '#20222a', color: '#d2d6df', shadow: '#101115' };
 
-      case 'monochrome': // Matte white-gray + solid black contrast
+      case 'monochrome':
         if (role === 'accent') return { bg: '#e2e6ee', color: '#111215', shadow: '#8a92a2' };
         if (role === 'mod') return { bg: '#15161b', color: '#9fa6b5', shadow: '#0c0d10' };
         return { bg: '#484d59', color: '#f0f3f8', shadow: '#22252c' };
 
-      case 'graphite': // Dark charcoal + Amber accent
+      case 'graphite':
         if (role === 'accent') return { bg: '#e6a15c', color: '#141518', shadow: '#995a1c' };
         if (role === 'space') return { bg: '#333742', color: '#fff', shadow: '#1a1c22' };
         if (role === 'mod') return { bg: '#171920', color: '#8a91a0', shadow: '#0c0d10' };
         return { bg: '#262933', color: '#e0e4ec', shadow: '#14161c' };
 
-      case 'midnight': // Stealth Ninja All-Black
+      case 'midnight':
         if (role === 'accent') return { bg: '#202228', color: '#687082', shadow: '#0d0e11' };
         if (role === 'mod') return { bg: '#0f1013', color: '#4a5060', shadow: '#07080a' };
         return { bg: '#17181d', color: '#555c6d', shadow: '#0c0d10' };
@@ -496,14 +493,12 @@ class HexaCraftApp {
     }
   }
 
-  // Render Keyboard on Stage
   renderKeyboard() {
     const grid = document.getElementById('keysGrid');
     const housing = document.getElementById('keyboardHousing');
     const plate = document.getElementById('keyboardPlate');
     if (!grid) return;
 
-    // Apply housing model & finish
     if (this.state.case === 'wooting_twotone') {
       housing.style.background = 'linear-gradient(180deg, #101114 0%, #282c35 100%)';
       housing.style.borderColor = '#474d5c';
@@ -517,7 +512,7 @@ class HexaCraftApp {
     } else if (this.state.case === 'blade60_gunmetal') {
       housing.style.background = 'linear-gradient(135deg, #252932 0%, #14161b 100%)';
       housing.style.borderColor = '#3e4554';
-      housing.style.borderRadius = '22px'; // Chamfered feel
+      housing.style.borderRadius = '22px';
       housing.style.boxShadow = '0 30px 60px rgba(0,0,0,0.9), inset 0 2px 2px rgba(255,255,255,0.12)';
     } else if (this.state.case === 'freebird60_charcoal') {
       housing.style.background = 'linear-gradient(145deg, #1c1d24 0%, #101115 100%)';
@@ -530,14 +525,12 @@ class HexaCraftApp {
       housing.style.borderRadius = '18px';
       housing.style.boxShadow = '0 25px 50px rgba(0,0,0,0.8), 0 0 25px rgba(78, 205, 196, 0.15), inset 0 1px 2px rgba(255,255,255,0.25)';
     } else {
-      // Tofu60 2.0 Obsidian Black default
       housing.style.background = '#121316';
       housing.style.borderColor = '#242730';
       housing.style.borderRadius = '16px';
       housing.style.boxShadow = '0 30px 60px rgba(0,0,0,0.85), inset 0 1px 1px rgba(255,255,255,0.15)';
     }
 
-    // Apply Plate color (Carbon Fiber vs Aluminum)
     if (this.state.plate === 'carbon') {
       plate.style.borderColor = '#1f242d';
       plate.style.background = 'repeating-linear-gradient(45deg, #16181d, #16181d 4px, #0e1014 4px, #0e1014 8px)';
@@ -551,7 +544,6 @@ class HexaCraftApp {
       plate.style.background = '#14161c';
     }
 
-    // Update layout & PCB title
     const activeLayoutLabel = document.getElementById('activeLayoutName');
     if (activeLayoutLabel) {
       activeLayoutLabel.textContent = `VENOM 60HE (${this.state.pcbName}) • ${this.state.plateName}`;
@@ -570,13 +562,11 @@ class HexaCraftApp {
         keyEl.setAttribute('data-code', key.code);
         keyEl.textContent = key.label;
 
-        // Apply dynamic colors
         const colors = this.getKeycapColors(key.role);
         keyEl.style.backgroundColor = colors.bg;
         keyEl.style.color = colors.color;
         keyEl.style.setProperty('--key-shadow', colors.shadow);
 
-        // Sound & Click handling
         keyEl.addEventListener('click', () => {
           this.triggerKeyVisual(keyEl);
           window.KeyboardSound.playKey(this.state.switch, key.label);
@@ -596,7 +586,6 @@ class HexaCraftApp {
     }, 120);
   }
 
-  // Render Catalog Products
   renderCatalog(filter = 'all') {
     const container = document.getElementById('productsCatalogGrid');
     if (!container) return;
@@ -645,7 +634,6 @@ class HexaCraftApp {
         </div>
       `;
 
-      // Bind Cart Button
       const btn = card.querySelector('.add-btn');
       btn.addEventListener('click', () => {
         this.addToCart({
@@ -665,7 +653,6 @@ class HexaCraftApp {
     }
   }
 
-  // Cart Management
   addToCart(item) {
     const existingIndex = this.cart.findIndex(i => i.id === item.id);
     if (existingIndex > -1) {
@@ -750,9 +737,7 @@ class HexaCraftApp {
     document.getElementById('cartBackdrop').classList.remove('active');
   }
 
-  // Bind All Event Listeners
   bindEvents() {
-    // Sound Toggle in Header
     const soundToggle = document.getElementById('soundToggleBtn');
     if (soundToggle) {
       soundToggle.addEventListener('click', () => {
@@ -762,7 +747,6 @@ class HexaCraftApp {
       });
     }
 
-    // Cart Open/Close
     document.getElementById('openCartBtn').addEventListener('click', () => {
       this.renderCartItems();
       this.openCart();
@@ -770,7 +754,6 @@ class HexaCraftApp {
     document.getElementById('closeCartBtn').addEventListener('click', () => this.closeCart());
     document.getElementById('cartBackdrop').addEventListener('click', () => this.closeCart());
 
-    // Configurator Option Buttons
     document.querySelectorAll('.option-card').forEach(btn => {
       btn.addEventListener('click', (e) => {
         const target = e.currentTarget;
@@ -779,11 +762,9 @@ class HexaCraftApp {
         const price = parseInt(target.dataset.price || '0', 10);
         const name = target.dataset.name || target.querySelector('.option-name')?.textContent;
 
-        // Toggle active status in same group
         target.closest('.options-grid').querySelectorAll('.option-card').forEach(c => c.classList.remove('active'));
         target.classList.add('active');
 
-        // Update App State
         if (type === 'pcb') {
           this.state.pcb = value;
           this.state.pcbName = name;
@@ -804,7 +785,6 @@ class HexaCraftApp {
           this.state.switch = value;
           this.state.switchName = name;
           this.state.switchPrice = price;
-          // Play preview keystroke
           window.KeyboardSound.playKey(this.state.switch, 'Preview');
         }
 
@@ -813,7 +793,6 @@ class HexaCraftApp {
       });
     });
 
-    // Weight Bar Engraving Live Input
     const engravingInput = document.getElementById('engravingText');
     const weightBar = document.querySelector('.case-weight-bar');
     if (engravingInput && weightBar) {
@@ -824,10 +803,11 @@ class HexaCraftApp {
       });
     }
 
-    // Real Physical Keyboard Keydown Detection & Live Typing Field
     const typingInput = document.getElementById('liveTypingInput');
     if (typingInput) {
       typingInput.addEventListener('keydown', (e) => {
+        if (e.repeat) return; // 꾹 누를 때 소리 중복 반복 출력 방지[cite: 1]
+
         const code = e.code;
         const keycap = document.querySelector(`.keycap[data-code="${code}"]`);
         if (keycap) {
@@ -837,7 +817,6 @@ class HexaCraftApp {
       });
     }
 
-    // Full sound demo run
     const playDemoBtn = document.getElementById('playFullSoundBtn');
     if (playDemoBtn) {
       playDemoBtn.addEventListener('click', () => {
@@ -845,7 +824,6 @@ class HexaCraftApp {
       });
     }
 
-    // Add Custom Build to Cart
     document.getElementById('addCustomToCartBtn').addEventListener('click', () => {
       const customItem = {
         id: `VENOM-${Date.now()}`,
@@ -857,7 +835,6 @@ class HexaCraftApp {
       this.addToCart(customItem);
     });
 
-    // Share / Copy Config Spec
     document.getElementById('saveShareConfigBtn').addEventListener('click', () => {
       const summaryText = `[VENOM 60HE 커스텀 빌드 견적서]\n기판: ${this.state.pcbName}\n보강판: ${this.state.plateName}\n하우징: ${this.state.caseName}\n스위치: ${this.state.switchName}\n키캡: ${this.state.keycapName}\n황동각인: ${this.state.engraving}\n총 견적 합계: ₩${this.calculateTotal().toLocaleString()}`;
       navigator.clipboard.writeText(summaryText).then(() => {
@@ -867,7 +844,6 @@ class HexaCraftApp {
       });
     });
 
-    // Catalog Tabs
     document.querySelectorAll('.tab-btn').forEach(tab => {
       tab.addEventListener('click', (e) => {
         document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
@@ -877,7 +853,6 @@ class HexaCraftApp {
       });
     });
 
-    // Checkout Order Submission
     const checkoutBtn = document.getElementById('checkoutBtn');
     const orderModal = document.getElementById('orderSuccessModal');
     const closeOrderBtn = document.getElementById('closeOrderModalBtn');
@@ -914,7 +889,6 @@ class HexaCraftApp {
   }
 }
 
-// Start application when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
   window.App = new HexaCraftApp();
 });

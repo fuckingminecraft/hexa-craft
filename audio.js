@@ -1,4 +1,4 @@
-// Audio Player Engine: 기계식 스위치는 무음 처리, 자석축만 실제 오디오 파일 재생
+// Audio Player Engine: 기계식 스위치는 무음 처리, 자석축만 실제 오디오 파일(.wav) 재생
 class KeyboardSoundEngine {
   constructor() {
     this.muted = false;
