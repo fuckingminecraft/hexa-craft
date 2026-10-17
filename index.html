@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HEXA STUDIO | 프리미엄 커스텀 키보드 스튜디오</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- PortOne (Iamport) PG SDK for Real Payments -->
+  <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+  <!-- Google Identity Services SDK -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+
+<body>
+  <!-- Header / Navigation -->
+  <header class="header">
+    <div class="header-container">
+      <a href="#" class="brand-logo">
+        <div class="logo-mark">
+          <span>H</span>
+        </div>
+        <div class="logo-text">HEXA<span>CRAFT</span></div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#customizer" class="nav-link">견적짜기 (Customizer)</a>
+        <a href="#products" class="nav-link">둘러보기 (Products)</a>
+        <a href="#sound-lab" class="nav-link">사운드 랩</a>
+        <a href="#specs" class="nav-link">장인정신 & 설계</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="sound-toggle-btn" id="soundToggleBtn" title="타건 효과음 켜기/끄기">
+          <i data-lucide="volume-2"></i>
+          <span>타건음 ON</span>
+        </button>
+        <button class="order-history-btn" id="openOrdersBtn" title="내 주문 내역 조회">
+          <i data-lucide="receipt"></i>
+          <span>주문 내역</span>
+        </button>
+
+        <!-- User Authentication & Profile Slot -->
+        <div class="user-auth-slot" id="userAuthSlot">
+          <button class="btn-auth-login" id="openAuthBtn">
+            <i data-lucide="user"></i>
+            <span>로그인</span>
+          <button class="btn-auth-login" id="openAuthBtn">
+            <i data-lucide="user"></i>
+            <span>로그인</span>
+          </button>
+          <button class="btn-auth-login admin-login-btn" id="openAdminLoginBtn" title="관리자 로그인">
+            <i data-lucide="shield"></i>
+            <span>관리자</span>
+          </button>
+
+          <div class="user-profile-chip" id="userProfileChip" style="display:none;">
+            <div class="user-avatar" id="userAvatarText">G</div>
+            <div class="user-meta-dropdown-trigger" id="userMenuTrigger">
+              <span class="user-name-display" id="userNameDisplay">Google 회원</span>
+              <i data-lucide="chevron-down" style="width:13px; height:13px;"></i>
+            </div>
+            <div class="user-dropdown-menu" id="userDropdownMenu">
+              <div class="dropdown-header">
+                <strong id="dropdownUserName">Google 회원 님</strong>
+                <small id="dropdownUserEmail">user@gmail.com</small>
+              </div>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item" id="menuOrderHistoryBtn">
+                <i data-lucide="receipt"></i>
+                <span>내 주문 & 결제 내역</span>
+              </button>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item text-danger" id="logoutBtn">
+                <i data-lucide="log-out"></i>
+                <span>로그아웃</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <button class="cart-btn" id="openCartBtn" aria-label="장바구니 열기">
+          <i data-lucide="shopping-bag"></i>
+          <span class="cart-badge" id="cartBadge">0</span>
+        </button>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="메뉴 열기">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-container">
+      <div class="hero-tag">
+        <span class="pulse-dot"></span>
+        CUSTOM KEYBOARD ATELIER • VENOM 60HE LINE
+      </div>
+      <h1 class="hero-title">
+        HEXA CRAFT<br>
+        <span class="gradient-text">완벽한 블랙 & 그레이 미학.</span>
+      </h1>
+      <p class="hero-desc">
+        항공우주 등급 CNC 통알루미늄 하우징, 베놈 60HE 마그네틱 자석축 아키텍처,
+        그리고 카본파이버 보강판. 스크롤 전에 아래 버튼으로 바로 견적을 구성하거나 완성품을 둘러보세요.
+      </p>
+
+      <div class="hero-cta-group">
+        <a href="#customizer" class="btn btn-primary btn-hero-main">
+          <i data-lucide="sliders"></i>
+          <span>나만의 키보드 견적짜기</span>
+          <i data-lucide="arrow-right"></i>
+        </a>
+        <a href="#products" class="btn btn-secondary btn-hero-sub">
+          <i data-lucide="compass"></i>
+          <span>완성작 둘러보기</span>
+        </a>
+        <a href="#sound-lab" class="btn btn-outline btn-hero-sound">
+          <i data-lucide="headphones"></i>
+          <span>타건음 청음하기</span>
+        </a>
+      </div>
+
+      <div class="hero-nav-cards">
+        <a href="#customizer" class="hero-card-link">
+          <div class="card-icon"><i data-lucide="cpu"></i></div>
+          <div class="card-text">
+            <strong>베놈 60HE 견적 빌더</strong>
+            <span>기판·보강판·하우징 선택 & 실시간 견적</span>
+          </div>
+          <i data-lucide="chevron-right" class="card-arrow"></i>
+        </a>
+        <a href="#products" class="hero-card-link">
+          <div class="card-icon"><i data-lucide="shopping-bag"></i></div>
+          <div class="card-text">
+            <strong>마스터 에디션 둘러보기</strong>
+            <span>즉시 출고 가능한 베놈 60HE 시그니처 완제품</span>
+          </div>
+          <i data-lucide="chevron-right" class="card-arrow"></i>
+        </a>
+      </div>
+
+      <div class="hero-metrics">
+        <div class="metric-item">
+          <span class="metric-value">VENOM 60HE</span>
+          <span class="metric-label">홀센서 8K 자석축</span>
+        </div>
+        <div class="metric-divider"></div>
+        <div class="metric-item">
+          <span class="metric-value">0.02mm</span>
+          <span class="metric-label">초정밀 래피드 트리거</span>
+        </div>
+        <div class="metric-divider"></div>
+        <div class="metric-item">
+          <span class="metric-value">Carbon / Alu</span>
+          <span class="metric-label">특주 카본·알루 보강판</span>
+        </div>
+        <div class="metric-divider"></div>
+        <div class="metric-item">
+          <span class="metric-value">CNC 6063</span>
+          <span class="metric-label">블랙 & 그레이 투톤</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Visual Customizer Section -->
+  <section id="customizer" class="section customizer-section">
+    <div class="section-container">
+      <div class="section-header text-center">
+        <span class="section-badge">VENOM 60HE STUDIO</span>
+        <h2 class="section-title">베놈 60HE 리얼타임 커스텀 스튜디오</h2>
+        <p class="section-subtitle">베놈 60HE 기판 버전, 카본파이버/알루미늄 보강판, 블랙&그레이 하우징 및 자석축 스위치를 선택하고 타건감을 즉시 테스트하세요.</p>
+      </div>
+
+      <div class="customizer-layout">
+        <!-- Left: Live Interactive Keyboard Preview & Sound Test -->
+        <div class="customizer-viewport-card">
+          <div class="viewport-header">
+            <div class="viewport-status">
+              <span class="status-indicator"></span>
+              <span id="activeLayoutName">VENOM 60HE (61키 포커배열)</span>
+            </div>
+            <div class="viewport-controls">
+              <span class="instruction-badge"><i data-lucide="keyboard"></i> 자석축 실시간 반응 키 테스트</span>
+            </div>
+          </div>
+
+          <div class="keyboard-stage">
+            <div class="keyboard-case-wrapper" id="keyboardHousing">
+              <div class="case-bevel-outer">
+                <div class="case-bevel-inner">
+                  <div class="keyboard-plate" id="keyboardPlate">
+                    <div class="keys-grid" id="keysGrid"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="typing-tester-bar">
+            <div class="tester-input-wrapper">
+              <i data-lucide="terminal"></i>
+              <input type="text" id="liveTypingInput" placeholder="여기에 키를 입력하여 베놈 60HE 래피드 트리거 반응과 타건음을 테스트하세요..."
+                autocomplete="off">
+            </div>
+            <button class="sound-demo-btn" id="playFullSoundBtn">
+              <i data-lucide="play-circle"></i>
+              <span>타건 샘플 연속 재생</span>
+            </button>
+          </div>
+
+          <div class="build-specs-pill">
+            <div class="pill-spec"><i data-lucide="cpu"></i> 기판: <strong id="summaryPcb">베놈 60HE v2 기판</strong></div>
+            <div class="pill-spec"><i data-lucide="layers"></i> 보강판: <strong id="summaryPlate">카본 파이버 (Carbon
+                Fiber)</strong></div>
+            <div class="pill-spec"><i data-lucide="box"></i> 하우징: <strong id="summaryCase">토푸 60 2.0 (옵시디언 딥블랙)</strong>
+            </div>
+            <div class="pill-spec"><i data-lucide="zap"></i> 스위치: <strong id="summarySwitch">게이트론 자석축 마그네틱 제이드</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Configurator Controls Accordion/Panel -->
+        <div class="customizer-panel">
+          <div class="panel-header">
+            <h3>베놈 60HE 커스텀 사양</h3>
+            <span class="build-code">SERIES: VENOM-60HE</span>
+          </div>
+
+          <div class="config-steps-list">
+            <!-- Step 1: PCB Selection -->
+            <div class="config-step-group">
+              <label class="step-label">
+                <span class="step-num">01</span> 베놈 기판 선택 (VENOM PCB Edition)
+              </label>
+              <div class="options-grid grid-2" id="pcbOptions">
+                <button class="option-card" data-type="pcb" data-value="venom60he" data-name="베놈 60HE (자석축 홀센서 기판)"
+                  data-price="35000">
+                  <div class="option-name">베놈 60HE</div>
+                  <div class="option-desc">홀센서 자석축 • 래피드 트리거</div>
+                  <div class="option-price">+₩32,000</div>
+                </button>
+                <button class="option-card active" data-type="pcb" data-value="venom60he_v2"
+                  data-name="베놈 60HE v2 (차세대 플래그십)" data-price="55000">
+                  <div class="option-name">베놈 60HE v2</div>
+                  <div class="option-desc">0.02mm 초정밀 • 8K 폴링레이트</div>
+                  <div class="option-price">+₩60,000</div>
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 2: Plate Selection -->
+            <div class="config-step-group">
+              <label class="step-label">
+                <span class="step-num">02</span> 특주 보강판 소재 (Plate Material)
+              </label>
+              <div class="options-grid grid-2" id="plateOptions">
+                <button class="option-card active" data-type="plate" data-value="carbon"
+                  data-name="카본 파이버 (Carbon Fiber)" data-price="18000">
+                  <div class="option-name">카본 파이버 (Carbon)</div>
+                  <div class="option-desc">카본 특유의 선명한 피치 & 고탄성 래피드 반발력</div>
+                  <div class="option-price">+₩19,400</div>
+                </button>
+                <button class="option-card" data-type="plate" data-value="aluminum" data-name="CNC 알루미늄 (Aluminum)"
+                  data-price="0">
+                  <div class="option-name">CNC 알루미늄 (Alu)</div>
+                  <div class="option-desc">단단하고 정갈한 클래키 타건음 & 견고한 키감</div>
+                  <div class="option-price">+₩0</div>
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 3: Housing Selection -->
+            <div class="config-step-group">
+              <label class="step-label">
+                <span class="step-num">03</span> 커스텀 하우징 모델 & 마감 (60% Case)
+              </label>
+              <div class="options-grid grid-2" id="caseOptions">
+                <button class="option-card active" data-type="case" data-value="tofu60_black"
+                  data-name="토푸 60 2.0 (옵시디언 딥블랙)" data-price="0">
+                  <div class="swatch-indicator"
+                    style="background: linear-gradient(135deg, #18191c 0%, #0d0e10 100%); border: 1px solid #333;">
+                  </div>
+                  <div class="option-info">
+                    <div class="option-name">Tofu60 2.0 (딥블랙)</div>
+                    <div class="option-desc">CNC 통알루 6063 • 180방 샌드블라스트 아노다이징</div>
+                  </div>
+                  <div class="option-price">+₩0</div>
+                </button>
+                <button class="option-card" data-type="case" data-value="tofu60_gray" data-name="토푸 60 2.0 (스페이스 그레이)"
+                  data-price="15000">
+                  <div class="swatch-indicator"
+                    style="background: linear-gradient(135deg, #323640 0%, #1e2026 100%); border: 1px solid #4a505f;">
+                  </div>
+                  <div class="option-info">
+                    <div class="option-name">Tofu60 2.0 (스페이스 그레이)</div>
+                    <div class="option-desc">하이엔드 메탈릭 텍스처 • PVD 황동 무게추</div>
+                  </div>
+                  <div class="option-price">+₩16,000</div>
+                </button>
+                <button class="option-card" data-type="case" data-value="wooting_twotone"
+                  data-name="HEXA 섀도우 듀얼 투톤 (블랙&그레이)" data-price="35000">
+                  <div class="swatch-indicator"
+                    style="background: linear-gradient(90deg, #0f1013 50%, #2f343f 50%); border: 1px solid #484f60;">
+                  </div>
+                  <div class="option-info">
+                    <div class="option-name">HEXA 섀도우 듀얼 투톤</div>
+                    <div class="option-desc">상판 딥블랙 + 하판 티타늄그레이 2피스 챔퍼링</div>
+                  </div>
+                  <div class="option-price">+₩37,000</div>
+                </button>
+                <button class="option-card" data-type="case" data-value="blade60_gunmetal" data-name="블레이드 60 건메탈 티타늄"
+                  data-price="25000">
+                  <div class="swatch-indicator"
+                    style="background: linear-gradient(135deg, #2b3038 0%, #17191d 100%); border: 1px solid #3e4450;">
+                  </div>
+                  <div class="option-info">
+                    <div class="option-name">Blade60 (건메탈 티타늄)</div>
+                    <div class="option-desc">기하학적 앵글 라인 • 중후한 다크메탈 헤어라인</div>
+                  </div>
+                  <div class="option-price">+₩27,000</div>
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 4: Keycaps Color Scheme -->
+            <div class="config-step-group">
+              <label class="step-label">
+                <span class="step-num">04</span> PBT 염료승화 키캡 테마 (Keycaps)
+              </label>
+              <div class="options-grid grid-2" id="keycapOptions">
+                <button class="option-card active" data-type="keycap" data-value="stealth" data-name="스텔스 다크 그레이 PBT"
+                  data-price="0">
+                  <div class="keycap-preview-swatch stealth-swatch"></div>
+                  <div class="option-info">
+                    <div class="option-name">Stealth Dark Gray</div>
+                    <div class="option-desc">차콜 알파열 + 딥블랙 모디열</div>
+                  </div>
+                  <div class="option-price">+₩0</div>
+                </button>
+                <button class="option-card" data-type="keycap" data-value="monochrome" data-name="모노크롬 턱시도 PBT"
+                  data-price="10000">
+                  <div class="keycap-preview-swatch mono-swatch"></div>
+                  <div class="option-info">
+                    <div class="option-name">Monochrome Tuxedo</div>
+                    <div class="option-desc">매트 화이트그레이 + 블랙 콘트라스트</div>
+                  </div>
+                  <div class="option-price">+₩15,000</div>
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 5: HE Magnetic Switches -->
+            <div class="config-step-group">
+              <label class="step-label">
+                <span class="step-num">05</span> 자석축 스위치 선택 (Magnetic Switches)
+              </label>
+              <div class="options-grid grid-2" id="switchOptions">
+                <button class="option-card active" data-type="switch" data-value="magnetic_jade"
+                  data-name="게이트론 마그네틱 제이드 (자석축)" data-price="42000">
+                  <div class="switch-badge magnetic">MAGNETIC HE</div>
+                  <div class="option-info">
+                    <div class="option-name">Gateron Magnetic Jade</div>
+                    <div class="option-desc">자석축 종결급 타건음 • 0.02mm 래피드 트리거 최적화</div>
+                  </div>
+                  <div class="option-price">+₩42,000</div>
+                </button>
+                <button class="option-card" data-type="switch" data-value="magnetic_raw"
+                  data-name="게이트론 마그네틱 RAW HE (자석축)" data-price="38000">
+                  <div class="switch-badge magnetic">MAGNETIC HE</div>
+                  <div class="option-info">
+                    <div class="option-name">Gateron RAW HE (자석축)</div>
+                    <div class="option-desc">정밀 자석 코어 • 듀얼 레일 흔들림 0%</div>
+                  </div>
+                  <div class="option-price">+₩40,000</div>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-checkout-card">
+            <div class="price-row">
+              <span class="price-label">커스텀 빌드 견적 합계</span>
+              <div class="price-val">
+                <span class="currency">₩</span>
+                <span class="amount" id="totalPriceDisplay">289,000</span>
+              </div>
+            </div>
+            <div class="delivery-badge">
+              <i data-lucide="shield-check"></i> 1:1 수작업 빌드 & 풀윤활 검수 후 48시간 내 무료 발송
+            </div>
+            <div class="action-buttons-group">
+              <button class="btn btn-primary btn-block" id="addCustomToCartBtn">
+                <i data-lucide="shopping-cart"></i>
+                <span>이 조합으로 커스텀 주문하기</span>
+              </button>
+              <button class="btn btn-outline btn-block" id="saveShareConfigBtn">
+                <i data-lucide="share-2"></i>
+                <span>빌드 사양 복사하기</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sound Lab Interactive Section -->
+  <section id="sound-lab" class="section sound-lab-section">
+    <div class="section-container">
+      <div class="section-header text-center">
+        <span class="section-badge">ACOUSTIC FREQUENCY LAB</span>
+        <h2 class="section-title">스튜디오 사운드 랩</h2>
+        <p class="section-subtitle">로우피치(Thock)부터 클래키(Clack)까지. 실제 자석축 사운드 샘플을 청음해보세요.</p>
+      </div>
+
+      <div class="sound-lab-grid">
+        <div class="sound-card" data-sound="thock">
+          <div class="sound-card-header">
+            <div class="sound-icon-box thock">
+              <i data-lucide="waves"></i>
+            </div>
+            <div>
+              <h3 class="sound-title">Deep Thock (로우피치 조약돌)</h3>
+              <span class="sound-tag">PC 보강판 + 포론 3중 폼 + 마그네틱 제이드</span>
+            </div>
+          </div>
+          <p class="sound-desc">비 오는 날 조약돌이 맞부딪히는 듯한 깊고 묵직한 중저음 음향입니다.</p>
+          <div class="sound-eq-visualizer">
+            <span class="bar b1"></span><span class="bar b2"></span><span class="bar b3"></span><span
+              class="bar b4"></span><span class="bar b5"></span>
+          </div>
+          <button class="sound-play-action" onclick="window.KeyboardSound.playProfile('thock')">
+            <i data-lucide="play"></i> 청음하기
+          </button>
+        </div>
+
+        <div class="sound-card" data-sound="clack">
+          <div class="sound-card-header">
+            <div class="sound-icon-box clack">
+              <i data-lucide="sparkles"></i>
+            </div>
+            <div>
+              <h3 class="sound-title">Crisp Clack (클래키 하이피치)</h3>
+              <span class="sound-tag">알루 보강판 + 노폼 클래식 + 마그네틱 RAW</span>
+            </div>
+          </div>
+          <p class="sound-desc">알루미늄 바디 특유의 청량함과 또렷한 바닥 스트로크 음입니다.</p>
+          <div class="sound-eq-visualizer">
+            <span class="bar b3"></span><span class="bar b5"></span><span class="bar b2"></span><span
+              class="bar b4"></span><span class="bar b1"></span>
+          </div>
+          <button class="sound-play-action" onclick="window.KeyboardSound.playProfile('clack')">
+            <i data-lucide="play"></i> 청음하기
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Curated Complete Pre-Build Products Showcase -->
+  <section id="products" class="section products-section">
+    <div class="section-container">
+      <div class="section-header">
+        <div>
+          <span class="section-badge">VENOM MASTER EDITIONS</span>
+          <h2 class="section-title">베놈 60HE 마스터 빌드 컬렉션</h2>
+          <p class="section-subtitle">베놈 기판 정품 검수와 래피드 트리거 센서 캘리브레이션을 마친 완제품 라인업입니다.</p>
+        </div>
+      </div>
+
+      <div class="products-grid" id="productsCatalogGrid"></div>
+    </div>
+  </section>
+
+  <!-- Engineering Specs -->
+  <section id="specs" class="section specs-section">
+    <div class="section-container">
+      <div class="specs-grid">
+        <div class="specs-content">
+          <span class="section-badge">PRECISION CRAFTSMANSHIP</span>
+          <h2 class="section-title">0.02mm의 오차도 허용하지 않는<br>풀 메탈 모던 아키텍처</h2>
+          <p class="section-desc">
+            HEXA CRAFT는 플라스틱 사출 바디를 사용하지 않습니다. 통 알루미늄 인곳을 정밀 5축 CNC로 가공하여 완성됩니다.
+          </p>
+
+          <div class="spec-points">
+            <div class="point-item">
+              <div class="point-icon"><i data-lucide="layers"></i></div>
+              <div>
+                <h4>5중 가스켓 & 댐퍼 시스템</h4>
+                <p>포론 상하부 가스켓 및 흡음재가 통울림을 완벽 차단합니다.</p>
+              </div>
+            </div>
+            <div class="point-item">
+              <div class="point-icon"><i data-lucide="sliders"></i></div>
+              <div>
+                <h4>장인 수작업 스테빌라이저 튜닝</h4>
+                <p>수평 교정 및 윤활제로 정숙함을 선사합니다.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="specs-visual-card">
+          <div class="exploded-view-container">
+            <div class="layer-item l-top">
+              <span class="layer-tag">Top Case</span>
+              <span class="layer-name">CNC 6063 알루미늄 상판</span>
+            </div>
+            <div class="layer-item l-plate">
+              <span class="layer-tag">Plate & Gasket</span>
+              <span class="layer-name">FR4 플렉스컷 보강판 + 실리콘 가스켓</span>
+            </div>
+            <div class="layer-item l-pcb">
+              <span class="layer-tag">PCB Circuit</span>
+              <span class="layer-name">1.2mm 자석축 핫스왑 기판</span>
+            </div>
+            <div class="layer-item l-foam">
+              <span class="layer-tag">Acoustic Absorber</span>
+              <span class="layer-name">맞춤형 초고밀도 포론 하부 폼</span>
+            </div>
+            <div class="layer-item l-bottom">
+              <span class="layer-tag">Bottom Case & Weight</span>
+              <span class="layer-name">통 알루미늄 하판 + PVD 황동 무게추</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <div class="logo-mark"><span>H</span></div>
+            <div class="logo-text">HEXA<span>CRAFT</span></div>
+          </div>
+          <p class="brand-mission">
+            최상급 아노다이징 CNC 메탈과 정밀 음향 엔지니어링의 결합.
+          </p>
+        </div>
+
+        <div class="footer-links-group">
+          <div class="links-col">
+            <h5>ATELIER PRODUCTS</h5>
+            <a href="#customizer">커스텀 빌더 3D</a>
+            <a href="#products">시그니처 완제품</a>
+            <a href="#sound-lab">사운드 랩</a>
+          </div>
+          <div class="links-col">
+            <h5>SERVICES</h5>
+            <a href="#">전문 윤활/스위치 튜닝 대행</a>
+            <a href="#"></a>
+          </div>
+          <div class="links-col">
+            <h5>CONTACT STUDIO</h5>
+            <p class="studio-info"></p>
+            <p class="studio-info">고객지원: hexa.studio71@gmail.com </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="copy">© 2026 HEXA CRAFT STUDIO. All Rights Reserved.</div>
+        <div class="legal-links">
+          <a href="#">이용약관</a>
+          <a href="#">개인정보처리방침</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Slide-out Cart Modal Drawer -->
+  <div class="cart-drawer-backdrop" id="cartBackdrop"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="drawer-header">
+      <div class="drawer-title">
+        <i data-lucide="shopping-bag"></i>
+        <span>장바구니 견적서</span>
+      </div>
+      <button class="close-drawer-btn" id="closeCartBtn" aria-label="장바구니 닫기">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+
+    <div class="cart-items-container" id="cartItemsList"></div>
+
+    <div class="drawer-footer" id="cartFooter">
+      <div class="cart-summary-line">
+        <span>배송비</span>
+        <span class="free-shipping">무료 배송</span>
+      </div>
+      <div class="cart-total-line">
+        <span>총 결제 예정 금액</span>
+        <div class="total-amount-box">
+          <span class="total-curr">₩</span>
+          <span class="total-price" id="cartTotalSum">0</span>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-block checkout-submit-btn" id="checkoutBtn">
+        <i data-lucide="credit-card"></i>
+        <span>주문서 작성 및 결제하기</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Checkout & Payment Modal -->
+  <dialog class="modal-dialog checkout-dialog" id="checkoutModal">
+    <div class="checkout-modal-wrapper">
+      <div class="checkout-header">
+        <div class="checkout-title-box">
+          <div class="checkout-badge">HEXA CHECKOUT GATEWAY</div>
+          <h2>주문서 작성 및 전자결제</h2>
+          <p>포트원(PortOne) 실시간 전자결제 시스템으로 안전하게 결제됩니다.</p>
+        </div>
+        <button class="close-modal-btn" id="closeCheckoutModalBtn" aria-label="결제창 닫기">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <!-- Member Benefit Banner inside Checkout -->
+      <div class="checkout-auth-banner" id="checkoutAuthBanner">
+        <!-- Dynamically rendered based on login state -->
+      </div>
+
+      <div class="checkout-body">
+        <!-- Left: Order Breakdown & Discounts -->
+        <div class="checkout-summary-column">
+          <div class="checkout-section-card">
+            <div class="section-card-title">
+              <i data-lucide="package-check"></i>
+              <span>주문 상품 명세 (<span id="checkoutItemCount">0</span>개)</span>
+            </div>
+            <div class="checkout-items-list" id="checkoutItemsList">
+              <!-- Dynamically populated -->
+            </div>
+
+            <!-- Coupon Box -->
+            <div class="coupon-box">
+              <label for="couponCodeInput">프로모션 / 바우처 코드</label>
+              <div class="coupon-input-group">
+                <input type="text" id="couponCodeInput" placeholder="할인 코드 입력 (예: HEXA2026)" autocomplete="off">
+                <button type="button" class="btn-coupon" id="applyCouponBtn">적용</button>
+              </div>
+              <div class="coupon-feedback" id="couponFeedback"></div>
+              <div class="coupon-hint">💡 추천 코드: <code>HEXA2026</code> (₩10,000 즉시 할인), <code>VENOM60</code> (₩20,000
+                할인)</div>
+            </div>
+
+            <!-- Total Price Calculation Table -->
+            <div class="checkout-calc-table">
+              <div class="calc-row">
+                <span>주문 총 상품 금액</span>
+                <span class="calc-val">₩<span id="checkoutSubtotal">0</span></span>
+              </div>
+              <div class="calc-row discount-row">
+                <span>프로모션 할인</span>
+                <span class="calc-val discount-val">- ₩<span id="checkoutDiscount">0</span></span>
+              </div>
+              <div class="calc-row">
+                <span>배송비 (우체국 안심 특송)</span>
+                <span class="calc-val free-highlight">0원 (전국 무료 배송)</span>
+              </div>
+              <div class="calc-divider"></div>
+              <div class="calc-row total-row">
+                <span>최종 결제 예정 금액</span>
+                <div class="total-highlight">
+                  <span class="curr">₩</span>
+                  <span class="amount" id="checkoutFinalTotal">0</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Buyer Info & PG Selection -->
+        <div class="checkout-form-column">
+          <!-- Shipping Form -->
+          <div class="checkout-section-card">
+            <div class="section-card-header-row">
+              <div class="section-card-title">
+                <i data-lucide="truck"></i>
+                <span>주문자 및 배송지 정보</span>
+              </div>
+              <button type="button" class="btn-chip" id="autofillAddressBtn">
+                <i data-lucide="zap"></i>
+                <span>빠른 배송지 자동입력</span>
+              </button>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="buyerName">수령인 성함 <span class="required-star">*</span></label>
+                <input type="text" id="buyerName" placeholder="예: 홍길동" required>
+              </div>
+              <div class="form-group">
+                <label for="buyerTel">휴대폰 번호 <span class="required-star">*</span></label>
+                <input type="tel" id="buyerTel" placeholder="010-0000-0000" required>
+              </div>
+              <div class="form-group col-span-2">
+                <label for="buyerEmail">주문 확인 이메일 (디지털 영수증 수신) <span class="required-star">*</span></label>
+                <input type="email" id="buyerEmail" placeholder="example@hexacraft.studio" required>
+              </div>
+              <div class="form-group">
+                <label for="buyerPostcode">우편번호 <span class="required-star">*</span></label>
+                <input type="text" id="buyerPostcode" placeholder="13494" required>
+              </div>
+              <div class="form-group">
+                <label for="buyerAddress">배송지 기본 주소 <span class="required-star">*</span></label>
+                <input type="text" id="buyerAddress" placeholder="서울특별시 강남구 테헤란로 152" required>
+              </div>
+              <div class="form-group col-span-2">
+                <label for="buyerAddressDetail">상세 주소 및 동/호수</label>
+                <input type="text" id="buyerAddressDetail" placeholder="강남파이낸스센터 18층 HEXA 키보드 랩">
+              </div>
+              <div class="form-group col-span-2">
+                <label for="buyerMemo">배송 요청 사항</label>
+                <select id="buyerMemo">
+                  <option value="부재 시 경비실에 맡겨주세요.">부재 시 경비실에 맡겨주세요.</option>
+                  <option value="부재 시 문 앞에 놓아주세요.">부재 시 문 앞에 놓아주세요.</option>
+                  <option value="배송 전 미리 연락 부탁드립니다.">배송 전 미리 연락 부탁드립니다.</option>
+                  <option value="파손 위험 제품입니다. 던지지 말아주세요.">파손 위험 제품입니다. 던지지 말아주세요.</option>
+                  <option value="직접 수령하겠습니다.">직접 수령하겠습니다.</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Payment Methods -->
+          <div class="checkout-section-card">
+            <div class="section-card-title">
+              <i data-lucide="credit-card"></i>
+              <span>결제 수단 선택</span>
+            </div>
+
+            <div class="payment-methods-grid">
+              <label class="payment-method-card active" data-method="kakaopay" data-pg="kakaopay">
+                <input type="radio" name="paymentMethod" value="kakaopay" checked>
+                <div class="method-visual kakaopay-badge">
+                  <span class="badge-icon">🟡</span>
+                  <div class="method-meta">
+                    <strong>카카오페이</strong>
+                    <small>카카오톡 QR / 간편결제</small>
+                  </div>
+                </div>
+              </label>
+
+              <label class="payment-method-card" data-method="tosspay" data-pg="tosspay">
+                <input type="radio" name="paymentMethod" value="tosspay">
+                <div class="method-visual tosspay-badge">
+                  <span class="badge-icon">🔵</span>
+                  <div class="method-meta">
+                    <strong>토스페이</strong>
+                    <small>토스 앱 간편결제</small>
+                  </div>
+                </div>
+              </label>
+
+              <label class="payment-method-card" data-method="card" data-pg="html5_inicis">
+                <input type="radio" name="paymentMethod" value="card">
+                <div class="method-visual card-badge">
+                  <span class="badge-icon">💳</span>
+                  <div class="method-meta">
+                    <strong>신용 / 체크카드</strong>
+                    <small>국내외 모든 카드사 (KG이니시스)</small>
+                  </div>
+                </div>
+              </label>
+
+              <label class="payment-method-card" data-method="naverpay" data-pg="naverpay">
+                <input type="radio" name="paymentMethod" value="naverpay">
+                <div class="method-visual naverpay-badge">
+                  <span class="badge-icon">🟢</span>
+                  <div class="method-meta">
+                    <strong>네이버페이</strong>
+                    <small>네이버 포인트 / 카드</small>
+                  </div>
+                </div>
+              </label>
+
+              <label class="payment-method-card" data-method="trans" data-pg="html5_inicis">
+                <input type="radio" name="paymentMethod" value="trans">
+                <div class="method-visual trans-badge">
+                  <span class="badge-icon">🏦</span>
+                  <div class="method-meta">
+                    <strong>실시간 계좌이체</strong>
+                    <small>은행 계좌 즉시 이체</small>
+                  </div>
+                </div>
+              </label>
+
+              <label class="payment-method-card" data-method="vbank" data-pg="html5_inicis">
+                <input type="radio" name="paymentMethod" value="vbank">
+                <div class="method-visual vbank-badge">
+                  <span class="badge-icon">📜</span>
+                  <div class="method-meta">
+                    <strong>가상계좌</strong>
+                    <small>무통장 입금 에스크로</small>
+                  </div>
+                </div>
+              </label>
+            </div>
+
+            <!-- PG Settings Accordion -->
+            <details class="pg-config-accordion">
+              <summary>
+                <i data-lucide="settings-2"></i>
+                <span>실제 카카오페이 / 카드 결제 연동 가이드 & 가맹점 설정</span>
+                <i data-lucide="chevron-down" class="accordion-arrow"></i>
+              </summary>
+              <div class="pg-config-content">
+                <div class="pg-mode-toggle-group">
+                  <label class="pg-mode-option">
+                    <input type="radio" name="pgModeSelect" value="personal" checked>
+                    <span>👤 개인 판매자 실결제 모드 (사업자등록증 없이 카카오페이/토스/계좌로 직접 입금받기)</span>
+                  </label>
+                  <label class="pg-mode-option">
+                    <input type="radio" name="pgModeSelect" value="test">
+                    <span>🧪 포트원 테스트 PG 모드 (카카오 QR 및 카드 실제 결제창 연동 체험, 0원)</span>
+                  </label>
+                  <label class="pg-mode-option">
+                    <input type="radio" name="pgModeSelect" value="live">
+                    <span>⚡ 사업자 PG 가맹점 모드 (사업자등록증이 있는 경우 PortOne 실계약)</span>
+                  </label>
+                </div>
+
+                <!-- Personal Seller Direct Payment Settings (No Business License Required) -->
+                <div class="personal-seller-box" id="personalSellerBox" style="margin-top: 12px;">
+                  <div class="personal-seller-notice">
+                    <i data-lucide="check-circle" style="width:16px; height:16px; color:#39db80; flex-shrink:0;"></i>
+                    <span><strong>사업자등록증 없이도 100% 무료로 실제 결제(송금)를 받을 수 있습니다!</strong> 아래에 본인의 카카오페이 송금링크, 토스아이디 또는 계좌번호를
+                      적어두면, 고객이 결제할 때 실제 본인 계좌로 돈이 입금됩니다.</span>
+                  </div>
+
+                  <div class="form-grid" style="margin-top: 10px;">
+                    <div class="form-group">
+                      <label for="personalTossIdInput">내 토스아이디 (toss.me)</label>
+                      <input type="text" id="personalTossIdInput" placeholder="예: mykeyboard (toss.me/아이디)">
+                      <small class="helper-text">토스 앱 &gt; 내 프로필 &gt; '토스아이디'에서 30초 만에 무료 생성</small>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="personalKakaoLinkInput">내 카카오페이 송금/QR 링크</label>
+                      <input type="text" id="personalKakaoLinkInput"
+                        placeholder="예: https://qr.kakaopay.com/xxxx 또는 송금코드">
+                      <small class="helper-text">카카오톡 &gt; 더보기 &gt; 카카오페이 &gt; 송금 &gt; 'QR송금'에서 링크 복사</small>
+                    </div>
+
+                    <div class="form-group col-span-2">
+                      <label for="personalBankInput">입금받을 은행 계좌번호 및 예금주</label>
+                      <div class="input-with-button">
+                        <input type="text" id="personalBankInput" placeholder="예: 토스뱅크 1000-1234-5678 (예금주: 홍길동)">
+                        <button type="button" class="btn-subtle" id="savePersonalPaymentBtn">개인 결제 정보 저장</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- PortOne Merchant Settings (Only visible in test/live mode) -->
+                <div class="portone-config-box" id="portoneConfigBox" style="display:none; margin-top: 10px;">
+                  <label for="portoneUserCodeInput">PortOne 가맹점 식별코드 (User Code)</label>
+                  <div class="input-with-button">
+                    <input type="text" id="portoneUserCodeInput" value="imp00000000"
+                      placeholder="예: imp00000000 또는 imp12345678">
+                    <button type="button" class="btn-subtle" id="savePortoneCodeBtn">코드 저장</button>
+                  </div>
+                  <div class="pg-setup-guide-box">
+                    <strong>📌 사업자등록증이 있을 때 정식 PG사 연동 방법:</strong>
+                    <ol>
+                      <li><a href="https://portone.io" target="_blank" rel="noopener">portone.io</a> 회원가입 후 관리자 콘솔 로그인
+                      </li>
+                      <li>[결제 연동] &gt; [결제대행사(PG)]에서 '카카오페이' 또는 '토스페이먼츠/KG이니시스' 신청</li>
+                      <li>발급된 고객사 식별코드(<code>impXXXXXXXX</code>)를 위 입력창에 넣고 [코드 저장] &amp; [⚡ 실결제 가맹점 모드] 선택!</li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+            </details>
+          </div>
+
+          <!-- Checkout Terms & Submission -->
+          <div class="checkout-submit-card">
+            <label class="terms-label">
+              <input type="checkbox" id="agreeTermsCheck" checked>
+              <span>(필수) 구매조건 확인 및 전자결제 진행, 개인정보 제공에 동의합니다.</span>
+            </label>
+
+            <button type="button" class="btn btn-primary btn-block btn-pay-now" id="submitPaymentBtn">
+              <i data-lucide="shield-check"></i>
+              <span>₩<span id="submitPayBtnAmount">0</span> 안전 결제하기</span>
+            </button>
+
+            <div class="security-guarantee-row">
+              <span><i data-lucide="lock" style="width:12px; height:12px;"></i> 256-Bit SSL 정밀 보안</span>
+              <span>•</span>
+              <span><i data-lucide="shield" style="width:12px; height:12px;"></i> PG 에스크로 안전 결제</span>
+              <span>•</span>
+              <span><i data-lucide="award" style="width:12px; height:12px;"></i> 정품 인증 워런티</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Official Digital Order Receipt Slip Modal -->
+  <dialog class="modal-dialog receipt-dialog" id="orderReceiptModal">
+    <div class="receipt-modal-wrapper">
+      <div class="receipt-slip-container" id="printableReceiptSlip">
+        <div class="receipt-slip-header">
+          <div class="slip-brand">
+            <div class="slip-logo-badge">H</div>
+            <div>
+              <div class="slip-brand-title">HEXA CRAFT ATELIER</div>
+              <div class="slip-brand-sub">PREMIUM CUSTOM KEYBOARD STUDIO • VENOM 60HE LINE</div>
+            </div>
+          </div>
+          <div class="slip-status-badge" id="receiptStatusBadge">
+            <span class="status-dot pulse" id="receiptStatusDot"></span>
+            <span id="receiptStatusText">결제 승인 완료 (PAID)</span>
+          </div>
+        </div>
+
+        <div class="receipt-slip-title-box">
+          <h3 id="receiptSlipTitle">공식 전자 주문서 & 결제 영수증</h3>
+          <p class="receipt-date-time" id="receiptDateTime">-</p>
+        </div>
+
+        <div class="receipt-meta-grid">
+          <div class="meta-item">
+            <span class="meta-label">주문 번호</span>
+            <span class="meta-value highlight" id="receiptOrderId">-</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">PG 거래 승인번호 (TID)</span>
+            <span class="meta-value font-mono" id="receiptImpUid">-</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">결제 수단</span>
+            <span class="meta-value" id="receiptPayMethod">-</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">카드/승인 번호</span>
+            <span class="meta-value font-mono" id="receiptApplyNum">-</span>
+          </div>
+        </div>
+
+        <div class="receipt-divider"></div>
+
+        <!-- Ordered Items Summary -->
+        <div class="receipt-section-title">주문 상품 내역</div>
+        <div class="receipt-items-table-wrapper">
+          <table class="receipt-items-table">
+            <thead>
+              <tr>
+                <th>상품 및 빌드 사양</th>
+                <th style="text-align:center;">수량</th>
+                <th style="text-align:right;">단가</th>
+                <th style="text-align:right;">금액</th>
+              </tr>
+            </thead>
+            <tbody id="receiptItemsTbody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Price Breakdown -->
+        <div class="receipt-price-summary">
+          <div class="summary-line">
+            <span>주문 금액 합계</span>
+            <span id="receiptSubtotal">₩0</span>
+          </div>
+          <div class="summary-line discount" id="receiptDiscountLine" style="display:none;">
+            <span>프로모션 할인</span>
+            <span id="receiptDiscount">- ₩0</span>
+          </div>
+          <div class="summary-line">
+            <span>배송비 (우체국 안심 특송)</span>
+            <span class="free">0원</span>
+          </div>
+          <div class="receipt-divider subtle"></div>
+          <div class="summary-line grand-total">
+            <span>최종 결제 승인 금액</span>
+            <span class="grand-amount" id="receiptGrandTotal">₩0</span>
+          </div>
+        </div>
+
+        <!-- Shipping & Recipient Details -->
+        <div class="receipt-divider"></div>
+        <div class="receipt-section-title">배송지 및 수령인 정보</div>
+        <div class="receipt-shipping-box" id="receiptShippingBox">
+          <!-- Populated in JS -->
+        </div>
+
+        <!-- QC & Guarantee Notice -->
+        <div class="receipt-qc-notice">
+          <i data-lucide="check-check"></i>
+          <div>
+            <strong>HEXA 아틀리에 품질 보증 (Venom 60HE Line)</strong>
+            <p>본 제품은 0.02mm 래피드 트리거 센서 전수 정밀 캘리브레이션 및 스위치 수제 풀윤활 검수를 거친 후, 우체국 특송으로 안전하게 출고됩니다.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Receipt Dialog Footer Action Buttons -->
+      <div class="receipt-dialog-actions">
+        <button type="button" class="btn-subtle" id="adminConfirmPaymentBtn"
+          style="display:none; color:#39db80; border-color:rgba(57,219,128,0.4);">
+          <i data-lucide="check-check"></i>
+          <span>[판매자 전용] 실제 입금 확인 및 승인 처리</span>
+        </button>
+        <button type="button" class="btn btn-secondary" id="printReceiptBtn">
+          <i data-lucide="printer"></i>
+          <span>영수증 인쇄 / PDF 저장</span>
+        </button>
+        <button type="button" class="btn btn-secondary" id="copyOrderNumBtn">
+          <i data-lucide="copy"></i>
+          <span>주문번호 복사</span>
+        </button>
+        <button type="button" class="btn btn-secondary" id="viewHistoryFromReceiptBtn">
+          <i data-lucide="history"></i>
+          <span>내 주문 내역</span>
+        </button>
+        <button type="button" class="btn btn-primary" id="closeReceiptModalBtn">
+          <span>확인 (쇼핑 계속하기)</span>
+        </button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Order History Modal -->
+  <dialog class="modal-dialog history-dialog" id="orderHistoryModal">
+    <div class="history-modal-wrapper">
+      <div class="history-modal-header">
+        <div class="history-title-box">
+          <i data-lucide="receipt"></i>
+          <div>
+            <h3>내 주문 & 결제 내역</h3>
+            <p>HEXA CRAFT에서 결제 및 주문된 내역을 확인하실 수 있습니다.</p>
+          </div>
+        </div>
+        <button class="close-modal-btn" id="closeHistoryModalBtn" aria-label="닫기">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <div class="history-modal-body" id="orderHistoryList">
+        <!-- Rendered in JS -->
+      </div>
+
+      <div class="history-modal-footer">
+        <button type="button" class="btn-subtle" id="clearOrdersHistoryBtn">주문 내역 전체 삭제</button>
+        <button type="button" class="btn btn-secondary" id="closeHistoryBottomBtn">닫기</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Login & Membership Authentication Modal (Google Exclusive) -->
+  <dialog class="modal-dialog auth-dialog" id="authModal">
+    <div class="auth-modal-wrapper google-auth-wrapper">
+      <div class="auth-header">
+        <div class="auth-brand">
+          <div class="auth-logo">H</div>
+          <div>
+            <h3>HEXA CRAFT 계정 인증</h3>
+            <p>Google 공식 계정으로 안전하게 로그인 및 회원가입</p>
+          </div>
+        </div>
+        <button class="close-modal-btn" id="closeAuthModalBtn" aria-label="닫기">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <div class="auth-body">
+        <div class="google-auth-welcome">
+          <div class="google-g-badge">
+            <svg viewBox="0 0 48 48" width="44" height="44">
+              <path fill="#EA4335"
+                d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
+              <path fill="#4285F4"
+                d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
+              <path fill="#FBBC05"
+                d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
+              <path fill="#34A853"
+                d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
+              <path fill="none" d="M0 0h48v48H0z" />
+            </svg>
+          </div>
+          <h4>Google 계정으로 로그인</h4>
+          <p>별도의 비밀번호 없이 실제 Google 공식 인증 팝업을 통해 1초 만에 안전하게 로그인됩니다.</p>
+        </div>
+
+        <!-- Google OAuth Official Action Button -->
+        <button type="button" class="btn-google-signin" id="googleSignInBtn">
+          <svg viewBox="0 0 24 24" width="22" height="22">
+            <path fill="#EA4335"
+              d="M12 5c1.7 0 3.2.6 4.4 1.7l3.3-3.3C17.7 1.6 15 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3.1C6.2 7.1 8.9 5 12 5z" />
+            <path fill="#4285F4"
+              d="M23.5 12.3c0-.8-.1-1.5-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.7-2.4 3.6l3.9 3c2.3-2.1 3.5-5.2 3.5-8.8z" />
+            <path fill="#FBBC05"
+              d="M5.2 14.3c-.2-.7-.4-1.5-.4-2.3s.1-1.6.4-2.3L1.3 6.6C.5 8.2 0 10 0 12s.5 3.8 1.3 5.4l3.9-3.1z" />
+            <path fill="#34A853"
+              d="M12 24c3.2 0 6-1.1 8-2.9l-3.9-3c-1.1.7-2.5 1.2-4.1 1.2-3.1 0-5.8-2.1-6.8-5L1.3 17.4C3.3 21.3 7.3 24 12 24z" />
+          </svg>
+          <span id="googleSignInBtnText">Google 계정으로 계속하기</span>
+        </button>
+
+        <div id="googleGsiContainer" style="display:none; margin-top:12px; display:flex; justify-content:center;"></div>
+
+        <!-- Real Google OAuth Setup Card (No mock accounts) -->
+        <div class="google-client-card" id="googleClientCard" style="margin-top:16px;">
+          <div class="client-card-header">
+            <i data-lucide="key-round" style="width:16px; height:16px; color:var(--accent-cyan);"></i>
+            <span>Google Cloud OAuth 2.0 Web Client ID</span>
+          </div>
+          <p class="client-card-desc">실제 본인 Google 계정으로 로그인하려면 Google Cloud Console에서 생성한 Web Client ID를 등록해주세요.</p>
+          <div class="input-with-button" style="margin-top:8px;">
+            <input type="text" id="googleClientIdInput" placeholder="예: 1234567890-xxx.apps.googleusercontent.com">
+            <button type="button" class="btn-subtle" id="saveGoogleClientIdBtn">연동 저장</button>
+          </div>
+          <div class="google-oauth-guide"
+            style="margin-top:8px; font-size:0.75rem; color:var(--text-muted); line-height:1.5;">
+            💡 <strong>실제 Google OAuth 설정 방법 (무료):</strong><br>
+            1. <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener"
+              style="color:var(--accent-cyan); text-decoration:underline;">Google Cloud Console</a> &gt; [사용자 인증 정보]
+            &gt; [OAuth 클라이언트 ID 만들기]<br>
+            2. 애플리케이션 유형: <strong>웹 애플리케이션</strong><br>
+            3. 승인된 JavaScript 원본: <code>http://localhost:8089</code> 추가 후 Client ID 복사 &amp; 위 입력창에 저장!
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Elegant Toast Notification -->
+  <div class="hexa-toast" id="hexaToast">
+    <div class="toast-content">
+      <i data-lucide="info" class="toast-icon" id="toastIcon"></i>
+      <span class="toast-text" id="toastMessage">알림</span>
+    </div>
+  </div>
+
+  <!-- App scripts -->
+  <script src="audio.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
