@@ -2,13 +2,13 @@
 class KeyboardSoundEngine {
   constructor() {
     this.muted = false;
-    
+
     // 실제 오디오 파일이 존재하는 자석축 오디오 파일 경로 매핑
     this.audioFiles = {
       'magnetic_jade': 'audio/magnetic_jade.wav',
       'magnetic_raw': 'audio/magnetic_raw.wav'
     };
-    
+
     this.sounds = {};
     this.preloadElements();
   }
@@ -35,11 +35,11 @@ class KeyboardSoundEngine {
 
     // 기계식 스위치 종류(linear, tactile, silent, clicky 등)는 소리가 나지 않도록 무음 처리
     if (!this.audioFiles[switchType]) {
-      return; 
+      return;
     }
 
     let targetSound = this.sounds[switchType];
-    
+
     if (targetSound && targetSound.src) {
       const clone = targetSound.cloneNode();
       const isSpacebar = keyName === 'SPACE' || keyName === ' ' || keyName === 'Space';

@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HEXA STUDIO | 프리미엄 커스텀 키보드 스튜디오</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
+
 <body>
   <!-- Header / Navigation -->
   <header class="header">
@@ -59,10 +63,10 @@
         <span class="gradient-text">완벽한 블랙 & 그레이 미학.</span>
       </h1>
       <p class="hero-desc">
-        항공우주 등급 CNC 통알루미늄 하우징, 베놈 60HE 마그네틱 자석축 아키텍처, 
+        항공우주 등급 CNC 통알루미늄 하우징, 베놈 60HE 마그네틱 자석축 아키텍처,
         그리고 카본파이버 보강판. 스크롤 전에 아래 버튼으로 바로 견적을 구성하거나 완성품을 둘러보세요.
       </p>
-      
+
       <div class="hero-cta-group">
         <a href="#customizer" class="btn btn-primary btn-hero-main">
           <i data-lucide="sliders"></i>
@@ -159,7 +163,8 @@
           <div class="typing-tester-bar">
             <div class="tester-input-wrapper">
               <i data-lucide="terminal"></i>
-              <input type="text" id="liveTypingInput" placeholder="여기에 키를 입력하여 베놈 60HE 래피드 트리거 반응과 타건음을 테스트하세요..." autocomplete="off">
+              <input type="text" id="liveTypingInput" placeholder="여기에 키를 입력하여 베놈 60HE 래피드 트리거 반응과 타건음을 테스트하세요..."
+                autocomplete="off">
             </div>
             <button class="sound-demo-btn" id="playFullSoundBtn">
               <i data-lucide="play-circle"></i>
@@ -169,9 +174,12 @@
 
           <div class="build-specs-pill">
             <div class="pill-spec"><i data-lucide="cpu"></i> 기판: <strong id="summaryPcb">베놈 60HE v2 기판</strong></div>
-            <div class="pill-spec"><i data-lucide="layers"></i> 보강판: <strong id="summaryPlate">카본 파이버 (Carbon Fiber)</strong></div>
-            <div class="pill-spec"><i data-lucide="box"></i> 하우징: <strong id="summaryCase">토푸 60 2.0 (옵시디언 딥블랙)</strong></div>
-            <div class="pill-spec"><i data-lucide="zap"></i> 스위치: <strong id="summarySwitch">게이트론 자석축 마그네틱 제이드</strong></div>
+            <div class="pill-spec"><i data-lucide="layers"></i> 보강판: <strong id="summaryPlate">카본 파이버 (Carbon
+                Fiber)</strong></div>
+            <div class="pill-spec"><i data-lucide="box"></i> 하우징: <strong id="summaryCase">토푸 60 2.0 (옵시디언 딥블랙)</strong>
+            </div>
+            <div class="pill-spec"><i data-lucide="zap"></i> 스위치: <strong id="summarySwitch">게이트론 자석축 마그네틱 제이드</strong>
+            </div>
           </div>
         </div>
 
@@ -189,12 +197,14 @@
                 <span class="step-num">01</span> 베놈 기판 선택 (VENOM PCB Edition)
               </label>
               <div class="options-grid grid-2" id="pcbOptions">
-                <button class="option-card" data-type="pcb" data-value="venom60he" data-name="베놈 60HE (자석축 홀센서 기판)" data-price="35000">
+                <button class="option-card" data-type="pcb" data-value="venom60he" data-name="베놈 60HE (자석축 홀센서 기판)"
+                  data-price="35000">
                   <div class="option-name">베놈 60HE</div>
                   <div class="option-desc">홀센서 자석축 • 래피드 트리거</div>
                   <div class="option-price">+₩32,000</div>
                 </button>
-                <button class="option-card active" data-type="pcb" data-value="venom60he_v2" data-name="베놈 60HE v2 (차세대 플래그십)" data-price="55000">
+                <button class="option-card active" data-type="pcb" data-value="venom60he_v2"
+                  data-name="베놈 60HE v2 (차세대 플래그십)" data-price="55000">
                   <div class="option-name">베놈 60HE v2</div>
                   <div class="option-desc">0.02mm 초정밀 • 8K 폴링레이트</div>
                   <div class="option-price">+₩60,000</div>
@@ -208,12 +218,14 @@
                 <span class="step-num">02</span> 특주 보강판 소재 (Plate Material)
               </label>
               <div class="options-grid grid-2" id="plateOptions">
-                <button class="option-card active" data-type="plate" data-value="carbon" data-name="카본 파이버 (Carbon Fiber)" data-price="18000">
+                <button class="option-card active" data-type="plate" data-value="carbon"
+                  data-name="카본 파이버 (Carbon Fiber)" data-price="18000">
                   <div class="option-name">카본 파이버 (Carbon)</div>
                   <div class="option-desc">카본 특유의 선명한 피치 & 고탄성 래피드 반발력</div>
                   <div class="option-price">+₩19,400</div>
                 </button>
-                <button class="option-card" data-type="plate" data-value="aluminum" data-name="CNC 알루미늄 (Aluminum)" data-price="0">
+                <button class="option-card" data-type="plate" data-value="aluminum" data-name="CNC 알루미늄 (Aluminum)"
+                  data-price="0">
                   <div class="option-name">CNC 알루미늄 (Alu)</div>
                   <div class="option-desc">단단하고 정갈한 클래키 타건음 & 견고한 키감</div>
                   <div class="option-price">+₩0</div>
@@ -227,32 +239,44 @@
                 <span class="step-num">03</span> 커스텀 하우징 모델 & 마감 (60% Case)
               </label>
               <div class="options-grid grid-2" id="caseOptions">
-                <button class="option-card active" data-type="case" data-value="tofu60_black" data-name="토푸 60 2.0 (옵시디언 딥블랙)" data-price="0">
-                  <div class="swatch-indicator" style="background: linear-gradient(135deg, #18191c 0%, #0d0e10 100%); border: 1px solid #333;"></div>
+                <button class="option-card active" data-type="case" data-value="tofu60_black"
+                  data-name="토푸 60 2.0 (옵시디언 딥블랙)" data-price="0">
+                  <div class="swatch-indicator"
+                    style="background: linear-gradient(135deg, #18191c 0%, #0d0e10 100%); border: 1px solid #333;">
+                  </div>
                   <div class="option-info">
                     <div class="option-name">Tofu60 2.0 (딥블랙)</div>
                     <div class="option-desc">CNC 통알루 6063 • 180방 샌드블라스트 아노다이징</div>
                   </div>
                   <div class="option-price">+₩0</div>
                 </button>
-                <button class="option-card" data-type="case" data-value="tofu60_gray" data-name="토푸 60 2.0 (스페이스 그레이)" data-price="15000">
-                  <div class="swatch-indicator" style="background: linear-gradient(135deg, #323640 0%, #1e2026 100%); border: 1px solid #4a505f;"></div>
+                <button class="option-card" data-type="case" data-value="tofu60_gray" data-name="토푸 60 2.0 (스페이스 그레이)"
+                  data-price="15000">
+                  <div class="swatch-indicator"
+                    style="background: linear-gradient(135deg, #323640 0%, #1e2026 100%); border: 1px solid #4a505f;">
+                  </div>
                   <div class="option-info">
                     <div class="option-name">Tofu60 2.0 (스페이스 그레이)</div>
                     <div class="option-desc">하이엔드 메탈릭 텍스처 • PVD 황동 무게추</div>
                   </div>
                   <div class="option-price">+₩16,000</div>
                 </button>
-                <button class="option-card" data-type="case" data-value="wooting_twotone" data-name="HEXA 섀도우 듀얼 투톤 (블랙&그레이)" data-price="35000">
-                  <div class="swatch-indicator" style="background: linear-gradient(90deg, #0f1013 50%, #2f343f 50%); border: 1px solid #484f60;"></div>
+                <button class="option-card" data-type="case" data-value="wooting_twotone"
+                  data-name="HEXA 섀도우 듀얼 투톤 (블랙&그레이)" data-price="35000">
+                  <div class="swatch-indicator"
+                    style="background: linear-gradient(90deg, #0f1013 50%, #2f343f 50%); border: 1px solid #484f60;">
+                  </div>
                   <div class="option-info">
                     <div class="option-name">HEXA 섀도우 듀얼 투톤</div>
                     <div class="option-desc">상판 딥블랙 + 하판 티타늄그레이 2피스 챔퍼링</div>
                   </div>
                   <div class="option-price">+₩37,000</div>
                 </button>
-                <button class="option-card" data-type="case" data-value="blade60_gunmetal" data-name="블레이드 60 건메탈 티타늄" data-price="25000">
-                  <div class="swatch-indicator" style="background: linear-gradient(135deg, #2b3038 0%, #17191d 100%); border: 1px solid #3e4450;"></div>
+                <button class="option-card" data-type="case" data-value="blade60_gunmetal" data-name="블레이드 60 건메탈 티타늄"
+                  data-price="25000">
+                  <div class="swatch-indicator"
+                    style="background: linear-gradient(135deg, #2b3038 0%, #17191d 100%); border: 1px solid #3e4450;">
+                  </div>
                   <div class="option-info">
                     <div class="option-name">Blade60 (건메탈 티타늄)</div>
                     <div class="option-desc">기하학적 앵글 라인 • 중후한 다크메탈 헤어라인</div>
@@ -268,7 +292,8 @@
                 <span class="step-num">04</span> PBT 염료승화 키캡 테마 (Keycaps)
               </label>
               <div class="options-grid grid-2" id="keycapOptions">
-                <button class="option-card active" data-type="keycap" data-value="stealth" data-name="스텔스 다크 그레이 PBT" data-price="0">
+                <button class="option-card active" data-type="keycap" data-value="stealth" data-name="스텔스 다크 그레이 PBT"
+                  data-price="0">
                   <div class="keycap-preview-swatch stealth-swatch"></div>
                   <div class="option-info">
                     <div class="option-name">Stealth Dark Gray</div>
@@ -276,7 +301,8 @@
                   </div>
                   <div class="option-price">+₩0</div>
                 </button>
-                <button class="option-card" data-type="keycap" data-value="monochrome" data-name="모노크롬 턱시도 PBT" data-price="10000">
+                <button class="option-card" data-type="keycap" data-value="monochrome" data-name="모노크롬 턱시도 PBT"
+                  data-price="10000">
                   <div class="keycap-preview-swatch mono-swatch"></div>
                   <div class="option-info">
                     <div class="option-name">Monochrome Tuxedo</div>
@@ -293,7 +319,8 @@
                 <span class="step-num">05</span> 자석축 스위치 선택 (Magnetic Switches)
               </label>
               <div class="options-grid grid-2" id="switchOptions">
-                <button class="option-card active" data-type="switch" data-value="magnetic_jade" data-name="게이트론 마그네틱 제이드 (자석축)" data-price="42000">
+                <button class="option-card active" data-type="switch" data-value="magnetic_jade"
+                  data-name="게이트론 마그네틱 제이드 (자석축)" data-price="42000">
                   <div class="switch-badge magnetic">MAGNETIC HE</div>
                   <div class="option-info">
                     <div class="option-name">Gateron Magnetic Jade</div>
@@ -301,7 +328,8 @@
                   </div>
                   <div class="option-price">+₩42,000</div>
                 </button>
-                <button class="option-card" data-type="switch" data-value="magnetic_raw" data-name="게이트론 마그네틱 RAW HE (자석축)" data-price="38000">
+                <button class="option-card" data-type="switch" data-value="magnetic_raw"
+                  data-name="게이트론 마그네틱 RAW HE (자석축)" data-price="38000">
                   <div class="switch-badge magnetic">MAGNETIC HE</div>
                   <div class="option-info">
                     <div class="option-name">Gateron RAW HE (자석축)</div>
@@ -362,7 +390,8 @@
           </div>
           <p class="sound-desc">비 오는 날 조약돌이 맞부딪히는 듯한 깊고 묵직한 중저음 음향입니다.</p>
           <div class="sound-eq-visualizer">
-            <span class="bar b1"></span><span class="bar b2"></span><span class="bar b3"></span><span class="bar b4"></span><span class="bar b5"></span>
+            <span class="bar b1"></span><span class="bar b2"></span><span class="bar b3"></span><span
+              class="bar b4"></span><span class="bar b5"></span>
           </div>
           <button class="sound-play-action" onclick="window.KeyboardSound.playProfile('thock')">
             <i data-lucide="play"></i> 청음하기
@@ -381,7 +410,8 @@
           </div>
           <p class="sound-desc">알루미늄 바디 특유의 청량함과 또렷한 바닥 스트로크 음입니다.</p>
           <div class="sound-eq-visualizer">
-            <span class="bar b3"></span><span class="bar b5"></span><span class="bar b2"></span><span class="bar b4"></span><span class="bar b1"></span>
+            <span class="bar b3"></span><span class="bar b5"></span><span class="bar b2"></span><span
+              class="bar b4"></span><span class="bar b1"></span>
           </div>
           <button class="sound-play-action" onclick="window.KeyboardSound.playProfile('clack')">
             <i data-lucide="play"></i> 청음하기
@@ -560,4 +590,5 @@
   <script src="audio.js"></script>
   <script src="app.js"></script>
 </body>
+
 </html>

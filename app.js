@@ -131,11 +131,11 @@ class HexaCraftApp {
   }
 
   calculateTotal() {
-    return this.basePrice + 
-      this.state.pcbPrice + 
-      this.state.platePrice + 
-      this.state.casePrice + 
-      this.state.keycapPrice + 
+    return this.basePrice +
+      this.state.pcbPrice +
+      this.state.platePrice +
+      this.state.casePrice +
+      this.state.keycapPrice +
       this.state.switchPrice;
   }
 
@@ -256,20 +256,20 @@ class HexaCraftApp {
         specsHtml += '<li><i data-lucide="check" style="width:14px; height:14px; color:#39db80;"></i> ' + s + '</li>';
       });
 
-      card.innerHTML = 
+      card.innerHTML =
         '<div class="product-thumb-visual">' +
-          '<span class="badge-flag">READY TO SHIP</span>' +
+        '<span class="badge-flag">READY TO SHIP</span>' +
         '</div>' +
         '<div class="product-info-box">' +
-          '<h4>' + product.name + '</h4>' +
-          '<ul class="product-specs-list">' + specsHtml + '</ul>' +
-          '<div class="product-bottom-row">' +
-            '<div class="item-price">₩' + product.price.toLocaleString() + '</div>' +
-            '<button class="add-btn" data-id="' + product.id + '">' +
-              '<i data-lucide="shopping-bag" style="width:14px; height:14px;"></i>' +
-              '<span>장바구니 담기</span>' +
-            '</button>' +
-          '</div>' +
+        '<h4>' + product.name + '</h4>' +
+        '<ul class="product-specs-list">' + specsHtml + '</ul>' +
+        '<div class="product-bottom-row">' +
+        '<div class="item-price">₩' + product.price.toLocaleString() + '</div>' +
+        '<button class="add-btn" data-id="' + product.id + '">' +
+        '<i data-lucide="shopping-bag" style="width:14px; height:14px;"></i>' +
+        '<span>장바구니 담기</span>' +
+        '</button>' +
+        '</div>' +
         '</div>';
 
       card.querySelector('.add-btn').addEventListener('click', () => {
@@ -321,10 +321,10 @@ class HexaCraftApp {
     if (!list || !totalDisplay) return;
 
     if (this.cart.length === 0) {
-      list.innerHTML = 
+      list.innerHTML =
         '<div class="empty-cart-msg">' +
-          '<i data-lucide="shopping-bag" style="width:40px; height:40px; margin-bottom: 12px; stroke-width: 1.5;"></i>' +
-          '<p>장바구니에 담긴 제품이 없습니다.</p>' +
+        '<i data-lucide="shopping-bag" style="width:40px; height:40px; margin-bottom: 12px; stroke-width: 1.5;"></i>' +
+        '<p>장바구니에 담긴 제품이 없습니다.</p>' +
         '</div>';
       totalDisplay.textContent = '0';
       if (window.lucide) window.lucide.createIcons();
@@ -338,15 +338,15 @@ class HexaCraftApp {
       totalSum += item.price * item.qty;
       const row = document.createElement('div');
       row.className = 'cart-item-row';
-      row.innerHTML = 
+      row.innerHTML =
         '<div class="cart-item-title-row">' +
-          '<span class="cart-item-title">' + item.name + '</span>' +
-          '<span class="cart-item-delete" data-index="' + index + '"><i data-lucide="trash-2" style="width:16px; height:16px;"></i></span>' +
+        '<span class="cart-item-title">' + item.name + '</span>' +
+        '<span class="cart-item-delete" data-index="' + index + '"><i data-lucide="trash-2" style="width:16px; height:16px;"></i></span>' +
         '</div>' +
         '<div class="cart-item-details">' + item.details + '</div>' +
         '<div class="cart-item-bottom">' +
-          '<span class="cart-item-qty">수량: ' + item.qty + '개</span>' +
-          '<span class="cart-item-price">₩' + (item.price * item.qty).toLocaleString() + '</span>' +
+        '<span class="cart-item-qty">수량: ' + item.qty + '개</span>' +
+        '<span class="cart-item-price">₩' + (item.price * item.qty).toLocaleString() + '</span>' +
         '</div>';
 
       row.querySelector('.cart-item-delete').addEventListener('click', () => {
@@ -478,8 +478,8 @@ class HexaCraftApp {
 
         const receipt = document.getElementById('orderReceiptDetails');
         const totalSum = this.cart.reduce((acc, cur) => acc + (cur.price * cur.qty), 0);
-        
-        receipt.innerHTML = 
+
+        receipt.innerHTML =
           '<div><strong>주문 번호:</strong> #HEXA-' + Math.floor(100000 + Math.random() * 900000) + '</div>' +
           '<div><strong>주문 내역:</strong> ' + this.cart.map(c => c.name + ' (' + c.qty + '개)').join(', ') + '</div>' +
           '<div><strong>최종 결제 금액:</strong> ₩' + totalSum.toLocaleString() + ' (무료배송)</div>';
